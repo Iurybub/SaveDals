@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body class="stretched">
+   </head>
+   <body>
+      <%- include('../includes/nav.ejs') %>
+      <main>
+		  <% if (animals.length > 0) { %>
+            <div class="container">
+               <div class="row">
+                  <% for (let animal of animals) { %>
+                     <div class="card" style="width: 18rem;">
+                        <img src="<%= animal.imageUrl %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= animal.name %></h5>
+                          <p class="card-text"><%= animal.breed %></p>
+                          <a href="animals/<%= animal._id %>" class="btn btn-primary">Read More</a>
+                        </div>
+                      </div>
+                     <% } %>
+               </div>
+            </div>
+         <% } else { %>
+            <h1>No animals</h1>
+         <% } %>
+	  </main>
+      <%- include('../includes/footer.ejs') %>
+</body>
+</html>
