@@ -4,15 +4,14 @@ const adminController = require("../controllers/admin");
 
 const router = express.Router();
 
-router.get("/", adminController.getIndex);
+router.get("/", adminController.getDashboard); //Done
 
-// For the viewing pleasures
-router.get("/blogs", adminController.getBlogs);
-router.post("/blogs", adminController.postBlog);
-router.get("/blogs/:blogId", adminController.getBlogDetails);
-
-router.get("/animals", adminController.getAnimals);
-router.post("/animals", adminController.postAnimal);
-router.get("/animals/:animalId", adminController.getAnimalDetails);
+router.get("/animals", adminController.getAnimals); //Done
+router.get("/animals/details/:id", adminController.getAnimalDetails);
+router.get("/animals/add-new", adminController.getAddNew);
+router.post("/animals/add-new-post", adminController.postAddNew);
+// router.get("/animals/pending", adminController.getPending);
+// router.post("/animals/pending/:id", adminController.postPending);
+// router.get("/animals/questions", adminController.getQuestions);
 
 module.exports = router;

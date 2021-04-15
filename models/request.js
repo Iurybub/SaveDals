@@ -2,20 +2,19 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
-  title: {
+const requestSchema = new Schema({
+  first_name: {
     type: String,
     required: true,
   },
-  imageUrl: {
+  last_name: {
     type: String,
     required: true,
   },
-  content: {
+  email: {
     type: String,
     required: true,
   },
-  date: Date,
 });
 
-module.exports = mongoose.model("Blog", blogSchema);
+module.exports = mongoose.model("Request", requestSchema);

@@ -110,26 +110,26 @@
                         <div class="col-md-12 mt-lg-4 mt-4">
                            <!-- Page Heading -->
                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                              <h1 class="h3 mb-0 text-gray-800"><%= pageAbout %></h1>
                               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> 
                               Generate Report</a>
                            </div>
                         </div>
                         <div class="col-md-12">
                            <div class="row">
-                              <div class="col-sm-3">
+                              <div class="col-sm-4">
                                  <div class="card">
                                     <div class="card-body">
-                                       <h5 class="card-title mb-4">Blogs</h5>
+                                       <h5 class="card-title mb-4">Animals</h5>
                                        <h1 class="display-5 mt-1 mb-3"><a href="/blogs"><u>View All</u></a></h1>
                                        <div class="mb-1">
-                                          <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <%= blogCount %> </span>
+                                          <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>2</span>
                                           <span class="text-muted">Total</span>
                                        </div>
                                     </div>
                                  </div>
                               </div>
-                              <div class="col-sm-3">
+                              <div class="col-sm-4">
                                  <div class="card">
                                     <div class="card-body">
                                        <h5 class="card-title mb-4">Pending</h5>
@@ -141,10 +141,10 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="col-sm-3">
+                              <div class="col-sm-4">
                                  <div class="card">
                                     <div class="card-body">
-                                       <h5 class="card-title mb-4">Comments</h5>
+                                       <h5 class="card-title mb-4">Questions</h5>
                                        <h1 class="display-5 mt-1 mb-3"><a href="/blogs"><u>View All</u></a></h1>
                                        <div class="mb-1">
                                           <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> 6 </span>
@@ -153,29 +153,94 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="col-sm-3">
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <h5 class="card-title mb-4">Questions</h5>
-                                       <h1 class="display-5 mt-1 mb-3"><a href="/blogs"><u>View All</u></a></h1>
-                                       <div class="mb-1">
-                                          <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 12</span>
-                                          <span class="text-muted">Total</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+                             
                            </div>
                         </div>
                         <!-- column -->
+                        <div class="col-md-12 mt-4">
+                           <%- include('../includes/animal-list.ejs') %>
+                        </div>
+
+
                         <div class="col-md-12 mt-4">
                            <div class="card">
                               <div class="card-body">
                                  <!-- title -->
                                  <div class="d-md-flex align-items-center">
                                     <div>
-                                       <h4 class="card-title">Your Latest Pets</h4>
-                                       <h5 class="card-subtitle">Overview of Latest Pets for Adoption</h5>
+                                       <h4 class="card-title">Questions</h4>
+                                       <h5 class="card-subtitle">Questions from adopters</h5>
+                                    </div>
+                                    <div class="ml-auto">
+                                      
+                                    </div>
+                                 </div>
+                                 <!-- title -->
+                              </div>
+                              <div class="table-responsive">
+                                 <table class="table v-middle">
+                                    <thead>
+                                       <tr class="bg-light">
+                                          <th class="border-top-0">First</th>
+                                          <th class="border-top-0">Last</th>
+                                          <th class="border-top-0">Subject</th>
+                                          <th class="border-top-0">Message</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% if (questions.length > 0 ) {  %>
+                                      <% for (let q of questions) { %>
+                                      <tr>
+                                        <td>
+                                           <div class="d-flex align-items-center">
+                                              <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                                              <div class="">
+                                                <h4 class="m-b-0 font-16"><a href="/admin/animals/<%= animal._id%>"><%= q.first_name %></a></h4>
+                                              </div>
+                                           </div>
+                                        </td>
+                                        <td><%= q.last_name %></td>
+                                        <td><%= q.subject %></td>
+                                        <td>
+                                           <label class="label label-danger"><%= q.message %></label>
+                                        </td>
+                                     </tr>
+
+                                      <% } %>
+                                     <% } else { %>
+                                      
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                           <div class="d-flex align-items-center">
+                                              <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                                              <div class="">
+                                                <h4 class="m-b-0 font-16">N/A</h4>
+                                              </div>
+                                           </div>
+                                        </td>
+                                        <td>N/A</td>
+                                        <td>N/A</td>
+                                        <td>
+                                           <label class="label label-danger">N/A</label>
+                                        </td>
+                                     </tr>
+                                      <% } %>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                           <div class="card">
+                              <div class="card-body">
+                                 <!-- title -->
+                                 <div class="d-md-flex align-items-center">
+                                    <div>
+                                       <h4 class="card-title">Requests</h4>
+                                       <h5 class="card-subtitle">Pending Requests for Adoption</h5>
                                     </div>
                                     <div class="ml-auto">
                                       
@@ -203,7 +268,7 @@
                                            <div class="d-flex align-items-center">
                                               <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div>
                                               <div class="">
-                                                 <h4 class="m-b-0 font-16"><%= animal.name %></h4>
+                                                <h4 class="m-b-0 font-16"><a href="/admin/animals/<%= animal._id%>"><%= animal.name %></a></h4>
                                               </div>
                                            </div>
                                         </td>
@@ -218,7 +283,22 @@
 
                                       <% } %>
                                      <% } else { %>
-                                      <h1>Add animals</h1>
+                                       <tr>
+                                          <td>
+                                             <div class="d-flex align-items-center">
+                                                <div class="">
+                                                  <h4 class="m-b-0 font-16">N/A</h4>
+                                                </div>
+                                             </div>
+                                          </td>
+                                          <td>N/A</td>
+                                          <td>N/A</td>
+                                          <td>
+                                             <label class="label label-danger">N/A</label>
+                                          </td>
+                                          <td>N/A</td>
+                                          <td>N/A</td>
+                                       </tr>
                                       <% } %>
                                       
                                     </tbody>
@@ -235,7 +315,6 @@
                      <div class="row text-muted">
                         <div class="col-6 text-left">
                            <p class="mb-0">
-                              <a href="index.html" class="text-muted"><strong>Dashboard Vishweb Design </strong></a> &copy
                            </p>
                         </div>
                         <div class="col-6 text-right">
