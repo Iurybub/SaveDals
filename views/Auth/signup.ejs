@@ -7,10 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/login" method="post">
+    <form action="/signup" method="post">
         <input type="text" name="email" placeholder="Email"/>
+        <input type="text" name="name" placeholder="Full Name"/>
         <input type="text" type="password" name="password" placeholder="Password"/>
-        <button type="submit"> Login</button>
+        <input type="text" type="password" name="password_confirm" placeholder="Confirm Password"/>
+        <button type="submit">Signup</button>
     </form>
     <form action="/logout" method="post">
         <button type="submit">Logout</button>
