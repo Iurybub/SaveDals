@@ -2,11 +2,11 @@
     <link rel="stylesheet" href="style.css">
    </head>
    <body>
-       <%- include('../includes/nav.ejs') %>
+       <%- include('../includes/nav.ejs', {isAuth: isAuth})  %>
         <div class="container">
           <div class="row">
             <div class="col-sm-3">
-              <h1>Home</h1>
+             
             </div>
             <div class="col-sm-3">
               <h1>Home</h1>
@@ -19,6 +19,6 @@
             </div>
           </div>
         </div>
-      <%- include('../includes/footer.ejs') %>
+      <%- include('../includes/footer.ejs')  %>
    </body>
 </html>
