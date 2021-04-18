@@ -19,6 +19,10 @@ const questionSchema = new Schema({
     type: String,
     required: true,
   },
+  special_id: {
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("Question", questionSchema);

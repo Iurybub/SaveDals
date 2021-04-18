@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
+const letter_id = require("letter-id");
 
 exports.getHome = (req, res, next) => {
   res.render("user/home", {
@@ -33,6 +34,8 @@ exports.getAnimalDetails = (req, res, next) => {
 // User POST methods
 
 exports.postQuestion = (req, res, next) => {
+  let id_gen = letter_id.generateCustomLetterId(1, 10).toString();
+  const special_id = id_gen;
   const name = req.body.name;
   const email = req.body.email;
   const subject = req.body.subject;
@@ -43,6 +46,7 @@ exports.postQuestion = (req, res, next) => {
     email: email,
     subject: subject,
     message: message,
+    special_id: special_id,
   });
   question
     .save()

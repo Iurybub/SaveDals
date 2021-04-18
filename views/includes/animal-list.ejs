@@ -1,72 +1,71 @@
 <div class="card">
-    <div class="card-body">
-       <!-- title -->
-       <div class="d-md-flex align-items-center">
-          <div>
-             <h4 class="card-title">Dals</h4>
-             <h5 class="card-subtitle">Overview of Latest Dals for Adoption</h5>
-          </div>
-          <div class="ml-auto">
-            
-          </div>
-       </div>
-       <!-- title -->
-    </div>
-    <div class="table-responsive">
-       <table class="table v-middle">
-          <thead>
-             <tr class="bg-light">
-                <th class="border-top-0">Pet</th>
-                <th class="border-top-0">Age</th>
-                <th class="border-top-0">Breed</th>
-                <th class="border-top-0">Height</th>
-                <th class="border-top-0">Weight</th>
-                <th class="border-top-0">Status</th>
-                <th class="border-top-0"></th>
-             </tr>
-          </thead>
-          <tbody>
-           <% if (animals.length > 0 ) {  %>
-            <% for (let animal of animals) { %>
-            <tr>
-              <td>
-                 <div class="d-flex align-items-center">
-                    <div class="">
-                      <h4 class="m-b-0 font-16"><%= animal.name %></h4>
-                    </div>
-                 </div>
-              </td>
-              <td><%= animal.age %></td>
-              <td><%= animal.breed %></td>
-              <td>
-                 <label class="label label-danger"><%= animal.height %></label>
-              </td>
-              <td><%= animal.weight %></td>
-              <td><%= animal.adopted %></td>
-              <td><button class="btn btn-success">Edit</button></td>
-           </tr>
-
-            <% } %>
-           <% } else { %>
-             <tr>
-                <td>
-                   <div class="d-flex align-items-center">
-                      <div class="">
-                        <h4 class="m-b-0 font-16">N/A</h4>
-                      </div>
+   <div class="card-body">
+      <!-- title -->
+      <div class="d-md-flex align-items-center">
+         <div>
+            <h4 class="card-title">Dalmatians</h4>
+            <h5 class="card-subtitle">Pets upp for adoption &amp; foster</h5>
+         </div>
+         <div class="ml-auto">
+           
+         </div>
+      </div>
+      <!-- title -->
+   </div>
+   <div class="table-responsive">
+      <table class="table v-middle">
+         <thead>
+            <tr class="bg-light">
+               <th class="border-top-0">Dog</th>
+               <th class="border-top-0">Breed</th>
+               <th class="border-top-0">Status</th>
+               <th class="border-top-0">Edits</th>
+            </tr>
+         </thead>
+         <tbody>
+          <% if (animals.length > 0 ) {  %>
+           <% for (let animal of animals) { %>
+           <tr>
+             <td>
+                <div class="d-flex align-items-center">
+                   <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                   <div class="">
+                     <h4 class="m-b-0 font-16"></h4><%= animal.name %></h4>
                    </div>
-                </td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>
-                   <label class="label label-danger">N/A</label>
-                </td>
-                <td>N/A</td>
-                <td>N/A</td>
-             </tr>
-            <% } %>
-            
-          </tbody>
-       </table>
-    </div>
- </div>
+                </div>
+             </td>
+             <td><%= animal.breed %></td>
+             <td><%= animal.adopted %></td>
+             <td>
+               <label class="label label-danger">  
+                  <a class="btn btn-primary" style="color: white">
+                  Edit
+                </a></label>
+             </td>
+          </tr>
+
+           <% } %>
+          <% } else { %>
+           
+         </thead>
+         <tbody>
+           <tr>
+             <td>
+                <div class="d-flex align-items-center">
+                   <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                   <div class="">
+                     <h4 class="m-b-0 font-16">N/A</h4>
+                   </div>
+                </div>
+             </td>
+             <td>N/A</td>
+             <td>N/A</td>
+             <td>
+                <label class="label label-danger">N/A</label>
+             </td>
+          </tr>
+           <% } %>
+         </tbody>
+      </table>
+   </div>
+</div>
