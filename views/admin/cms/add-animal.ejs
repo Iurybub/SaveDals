@@ -202,6 +202,7 @@
                                                   <label for="exampleFormControlInput1" class="form-label">Description</label>
                                                   <textarea type="text" rows="5" class="form-control" id="description" name="description"></textarea>
                                                 </div>
+                                                <input type="hidden" value="<%= csrfToken%>" name="_csrf">
                                                 
                                                 <button type="submit" class="btn btn-primary">List Now</button>
                                           </form>

@@ -3,8 +3,8 @@
        <!-- title -->
        <div class="d-md-flex align-items-center">
           <div>
-             <h4 class="card-title">Dals</h4>
-             <h5 class="card-subtitle">Overview of Latest Dals for Adoption</h5>
+             <h4 class="card-title">Requests</h4>
+             <h5 class="card-subtitle">Pending Requests for Adoption</h5>
           </div>
           <div class="ml-auto">
             
@@ -16,34 +16,31 @@
        <table class="table v-middle">
           <thead>
              <tr class="bg-light">
-                <th class="border-top-0">Pet</th>
-                <th class="border-top-0">Age</th>
-                <th class="border-top-0">Breed</th>
-                <th class="border-top-0">Height</th>
-                <th class="border-top-0">Weight</th>
-                <th class="border-top-0">Status</th>
-                <th class="border-top-0"></th>
+                <th class="border-top-0">First</th>
+                <th class="border-top-0">Last</th>
+                <th class="border-top-0">Email</th>
+                <th class="border-top-0">Animal</th>
+                <th class="border-top-0">Attached Files</th>
              </tr>
           </thead>
           <tbody>
-           <% if (animals.length > 0 ) {  %>
-            <% for (let animal of animals) { %>
+           <% if (requests.length > 0 ) {  %>
+            <% for (let request of requests) { %>
             <tr>
               <td>
                  <div class="d-flex align-items-center">
+                    <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div>
                     <div class="">
-                      <h4 class="m-b-0 font-16"><%= animal.name %></h4>
+                      <h4 class="m-b-0 font-16"><a href="/admin/animals/<%= animal._id%>"><%= request.first_name %></a></h4>
                     </div>
                  </div>
               </td>
-              <td><%= animal.age %></td>
-              <td><%= animal.breed %></td>
+              <td><%= request.last_name %></td>
+              <td><%= request.email %></td>
               <td>
-                 <label class="label label-danger"><%= animal.height %></label>
+                 <label class="label label-danger"><%= request.animal %></label>
               </td>
-              <td><%= animal.weight %></td>
-              <td><%= animal.adopted %></td>
-              <td><button class="btn btn-success">Edit</button></td>
+              <td><%= request.paperword %></td>
            </tr>
 
             <% } %>
@@ -61,7 +58,6 @@
                 <td>
                    <label class="label label-danger">N/A</label>
                 </td>
-                <td>N/A</td>
                 <td>N/A</td>
              </tr>
             <% } %>

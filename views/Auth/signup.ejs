@@ -12,6 +12,7 @@
         <input type="text" name="name" placeholder="Full Name"/>
         <input type="text" type="password" name="password" placeholder="Password"/>
         <input type="text" type="password" name="password_confirm" placeholder="Confirm Password"/>
+        <input type="hidden" value="<%= csrfToken%>" name="_csrf">
         <button type="submit">Signup</button>
     </form>
     <form action="/logout" method="post">

@@ -32,9 +32,10 @@ exports.getDashboard = (req, res, next) => {
                 pageTitle: "Admin | Dasboard",
                 animals: animals,
                 questions: questions,
-                request: requests,
+                requests: requests,
                 path: "/",
                 pageAbout: "Dashboard",
+                user: req.session.user,
               });
             });
         });
@@ -64,6 +65,7 @@ exports.getAddNew = (req, res, next) => {
         animals: animals,
         path: "/admin/animals",
         pageAbout: "Add New",
+        csrfToken: req.csrfToken(),
       });
     })
     .catch((err) => console.log(err));

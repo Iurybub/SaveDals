@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const User = require("./models/user");
+const multer = require("multer");
+const csrf = require("csurf");
 
 const errorHandler = require("./controllers/error");
 
@@ -15,6 +17,8 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
+
+const csrfProtection = csrf();
 
 app.use(
   session({
@@ -49,11 +53,21 @@ const adminRoutes = require("./routes/admin");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 
+app.use(csrfProtection);
 app.use("/admin", adminRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 
 app.use(errorHandler.get404);
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, '/uploads')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.filename + '-' + Date.now() + path.extname(file.originalname))
+//   }
+// })
 
 const port = process.env.PORT || 3000;
 

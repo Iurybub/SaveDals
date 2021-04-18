@@ -15,6 +15,14 @@ const requestSchema = new Schema({
     type: String,
     required: true,
   },
+  animal: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Animal",
+  },
+  paperword: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Request", requestSchema);
