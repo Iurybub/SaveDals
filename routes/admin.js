@@ -5,17 +5,25 @@ const router = express.Router();
 const ensureAuth = require("../middleware/ensureAuth");
 
 router.get("/", ensureAuth, adminController.getDashboard); //Done
+router.get("/category/animals/add", ensureAuth, adminController.getAdd); // Done
+router.get("/category/animals", ensureAuth, adminController.getAnimals); // Done
+router.get("/category/animals/edit/:id", ensureAuth, adminController.getEdit); //Done
+router.get("/category/questions", ensureAuth, adminController.getQuestions);
 
-router.get("/animals", ensureAuth, adminController.getAnimals); //Done
-router.get(
-  "/animals/details/:id",
+router.post(
+  "/category/animals/actions/add",
   ensureAuth,
-  adminController.getAnimalDetails
+  adminController.postAdd
 );
-router.get("/animals/add-new", ensureAuth, adminController.getAddNew);
-router.post("/animals/add-new-post", ensureAuth, adminController.postAddNew);
-// router.get("/animals/pending", adminController.getPending);
-// router.post("/animals/pending/:id", adminController.postPending);
-// router.get("/animals/questions", adminController.getQuestions);
+router.post(
+  "/category/animals/actions/edit/:id",
+  ensureAuth,
+  adminController.postEdit
+);
+router.post(
+  "/category/animals/actions/delete/:id",
+  ensureAuth,
+  adminController.postDelete
+);
 
 module.exports = router;
