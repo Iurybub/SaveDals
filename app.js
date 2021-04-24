@@ -41,13 +41,38 @@ app.use((req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, "hey" + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+);
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 const adminRoutes = require("./routes/admin");
 const authRoutes = require("./routes/auth");
@@ -59,15 +84,6 @@ app.use(authRoutes);
 app.use(userRoutes);
 
 app.use(errorHandler.get404);
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, '/uploads')
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.filename + '-' + Date.now() + path.extname(file.originalname))
-//   }
-// })
 
 const port = process.env.PORT || 3000;
 

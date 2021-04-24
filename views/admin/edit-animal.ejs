@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/admin-style.css">
+   </head>
+   <body>
+      <div id="wrapper">
+         <div class="overlay"></div>
+         <%- include('../includes/ui/sidebar.ejs') %>
+         <div id="page-content-wrapper">
+            <div id="content">
+               <div class="container-fluid p-0 px-lg-0 px-md-0">
+                  <%- include('../includes/ui/nav.ejs') %>
+                  <div class="container px-lg-4">
+                     <div class="row">
+                        <%- include('../includes/ui/sub-menu.ejs', {pageAbout: pageAbout}) %>
+                        <div class="col-md-12 mt-4">
+                           <div class="row justify-content-center">
+                              <div class="col-12">
+                                 <form action="/admin//category/animals/actions/edit/<%= animal.id %>" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                        <input type="text" value="<%= animal.name %>" class="form-control" id="name" name="name">
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Image URL</label>
+                                        <input type="text" value="<%= animal.imageUrl %>" class="form-control" id="imageUrl" name="imageUrl">
+                                      </div>
+                                      <div class="mb-3">
+                                         <label for="exampleFormControlInput1" class="form-label">Age</label>
+                                         <input type="number" value="<%= animal.age %>"  step="0.01" class="form-control" id="age" name="age">
+                                      </div>
+                                      <div class="mb-3">
+                                         <label for="exampleFormControlInput1" class="form-label">Breed</label>
+                                         <input type="text" value="<%= animal.breed %>" class="form-control" id="breed" name="breed">
+                                      </div>
+                                      <div class="mb-3">
+                                         <label for="exampleFormControlInput1" class="form-label">Height</label>
+                                         <input type="number" value="<%= animal.height %>" class="form-control" id="height" name="height">
+                                      </div>
+                                      <div class="mb-3">
+                                         <label for="exampleFormControlInput1" class="form-label">Weight</label>
+                                         <input type="number"  value="<%= animal.weight %>" class="form-control" id="weight" name="weight">
+                                      </div>
+                                      <div class="mb-3">
+                                         <label for="exampleFormControlInput1" class="form-label">Color</label>
+                                         <input type="text"  value="<%= animal.color %>" class="form-control" id="color" name="color">
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Description</label>
+                                        <textarea type="text" rows="5" class="form-control" id="description" name="description"><%= animal.description %></textarea>
+                                      </div>
+                                      <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+                                      
+                                      <button type="submit" class="btn btn-primary">Update</button>
+                                  
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+               <%- include('../includes/ui/footer.ejs') %>
+            </div>
+         </div>
+      </div>
+      <%- include('../includes/footer.ejs') %>
+   </body>
+</html>

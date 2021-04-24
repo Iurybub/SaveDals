@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="/admin-style.css">
    </head>
    <body>
       <div id="wrapper">
@@ -13,15 +13,10 @@
                      <div class="row">
                         <%- include('../includes/ui/sub-menu.ejs', {pageAbout: pageAbout}) %>
                         <div class="col-md-12 mt-4">
+                           <%- include('../includes/ui/form.ejs') %>
+                        </div>
+                        <div class="col-md-12 mt-4">
                            <%- include('../includes/lists/animal-list.ejs') %>
-                        </div>
-
-                        <div class="col-md-12 mt-4">
-                           <%- include('../includes/lists/questions-list.ejs') %>
-                        </div>
-
-                        <div class="col-md-12 mt-4">
-                           <%- include('../includes/lists/requests-list.ejs') %>
                         </div>
                      </div>
                   </div>

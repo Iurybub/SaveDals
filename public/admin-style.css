@@ -439,3 +439,24 @@ footer.footer ul {
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+.image-container {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  object-fit: fill;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-right: 1rem;
+}
+.image-container img {
+  width: 100%;
+}
+.custom-file-upload {
+  border: none;
+  color: #282828;
+}
+.custom-file-upload input[type="file"] {
+  border: none;
+  color: #282828;
+}

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
-
+const fileHelper = require("../utils/file");
 exports.getDashboard = (req, res, next) => {
   let animals;
   let questions;
@@ -34,8 +34,10 @@ exports.getDashboard = (req, res, next) => {
                 questions: questions,
                 requests: requests,
                 path: "/",
+                pageTitle: "Admin | Dasboard",
                 pageAbout: "Dashboard",
-                user: req.session.user,
+                user: req.user,
+                csrfToken: req.csrfToken(),
               });
             });
         });
@@ -45,11 +47,13 @@ exports.getDashboard = (req, res, next) => {
 exports.getAnimals = (req, res, next) => {
   Animal.find()
     .then((animals) => {
-      res.render("admin/animals/animals", {
-        pageTitle: "Admin | All",
+      res.render("admin/animals", {
         animals: animals,
-        path: "/admin/add-animals",
-        pageAbout: "All Dals",
+        path: "/category/animals",
+        pageTitle: "Admin | Dals",
+        pageAbout: "Our Dals",
+        user: req.user,
+        csrfToken: req.csrfToken(),
       });
     })
     .catch((err) => console.log(err));
@@ -59,12 +63,13 @@ exports.getAdd = (req, res, next) => {
   Animal.find()
     .limit(5)
     .then((animals) => {
-      res.render("admin/animals/add-animal", {
-        pageTitle: "Admin | Add New",
+      res.render("admin/add-animal", {
         animals: animals,
-        path: "/admin/animals",
-        pageAbout: "Add New",
+        path: "/category/animals",
+        pageTitle: "Admin | Add Dals",
+        pageAbout: "Add New Dals",
         csrfToken: req.csrfToken(),
+        user: req.user,
       });
     })
     .catch((err) => console.log(err));
@@ -81,12 +86,13 @@ exports.getEdit = (req, res, next) => {
       if (!animal) {
         return res.redirect("/admin");
       }
-      res.render("admin/animals/edit-animal", {
+      res.render("admin/edit-animal", {
         pageTitle: `Edit ${animal.name}`,
         pageAbout: `Edit ${animal.name}`,
         edit_mode: edit_mode,
         animal: animal,
         path: "/admin/animals/edit",
+        user: req.user,
         csrfToken: req.csrfToken(),
       });
     })
@@ -95,14 +101,15 @@ exports.getEdit = (req, res, next) => {
 
 exports.postAdd = (req, res, next) => {
   const name = req.body.name;
-  const imageUrl = req.body.imageUrl;
+  const image = req.file;
+  const imageUrl = image.path;
   const age = req.body.age;
   const breed = req.body.breed;
   const height = req.body.height;
   const weight = req.body.weight;
   const color = req.body.color;
   const description = req.body.description;
-
+  console.log(imageUrl);
   const animal = new Animal({
     name: name,
     imageUrl: imageUrl,
@@ -117,7 +124,7 @@ exports.postAdd = (req, res, next) => {
     .save()
     .then((result) => {
       console.log("Created Product");
-      res.redirect("/admin/animals");
+      res.redirect("/admin/category/animals");
     })
     .catch((err) => console.log(err));
 };
@@ -126,7 +133,7 @@ exports.postEdit = (req, res, next) => {
   const edit_mode = req.query.edit;
   const id = req.params.id;
   const updated_name = req.body.name;
-  const updated_imageUrl = req.body.imageUrl;
+  const image = req.file;
   const updated_age = req.body.age;
   const updated_breed = req.body.breed;
   const updated_height = req.body.height;
@@ -137,7 +144,9 @@ exports.postEdit = (req, res, next) => {
   Animal.findById(id)
     .then((animal) => {
       animal.name = updated_name;
-      animal.imageUrl = updated_imageUrl;
+      if (imageUrl) {
+        animal.imageUrl = image.path;
+      }
       animal.age = updated_age;
       animal.breed = updated_breed;
       animal.height = updated_height;
@@ -154,14 +163,14 @@ exports.postEdit = (req, res, next) => {
 
 exports.postDelete = (req, res, next) => {
   const id = req.params.id;
-  Animal.findByIdAndDelete(id).then((animal) => {
-    if (!animal) {
-      return res.redirect("/admin/category/animals");
-    }
-    return animal.deleteOne().then(() => {
-      res.redirect("/admin/category/animals");
-    });
-  });
+  Animal.findById(id)
+    .then((animal) => {
+      fileHelper.deleteFile(animal.imageUrl);
+      return Animal.deleteOne({ _id: id }).then(() => {
+        res.redirect("/admin/category/animals");
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getQuestions = (req, res, next) => {

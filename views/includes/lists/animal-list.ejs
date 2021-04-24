@@ -7,7 +7,7 @@
             <h5 class="card-subtitle">Pets upp for adoption &amp; foster</h5>
          </div>
          <div class="ml-auto">
-           
+           <a href="/admin/category/animals/add" class="btn btn-success">Add</a>
          </div>
       </div>
       <!-- title -->
@@ -20,6 +20,7 @@
                <th class="border-top-0">Breed</th>
                <th class="border-top-0">Status</th>
                <th class="border-top-0">Edits</th>
+               <th class="border-top-0">Actions</th>
             </tr>
          </thead>
          <tbody>
@@ -28,7 +29,9 @@
            <tr>
              <td>
                 <div class="d-flex align-items-center">
-                   <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                  <div class="image-container">
+                     <img src="/<%= animal.imageUrl %>" alt="">
+                  </div>
                    <div class="">
                      <h4 class="m-b-0 font-16"></h4><%= animal.name %></h4>
                    </div>
@@ -42,8 +45,17 @@
                   Edit
                 </a></label>
              </td>
-          </tr>
+             <td>
+               <label class="label label-danger">  
+                  <form action="/admin/category/animals/actions/delete/<%= animal.id %>" method="post">
+                     <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+                     <button type="submit" class="btn btn-danger">Delete</button>
 
+                  </form>
+               </label>
+             </td>
+          </tr>
+          
            <% } %>
           <% } else { %>
            
