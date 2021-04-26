@@ -26,4 +26,12 @@ router.post(
   adminController.postDelete
 );
 
+router.get("/category/questions", ensureAuth, adminController.getQuestions);
+router.get(
+  "/category/testimonials",
+  ensureAuth,
+  adminController.getTestimonials
+);
+router.get("/category/pending", ensureAuth, adminController.getPending);
+
 module.exports = router;

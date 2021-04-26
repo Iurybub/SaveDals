@@ -1,0 +1,27 @@
+<div class="row">
+    <% if (testimonials.length > 0) { %>
+    <% for (let testimonial of testimonials) { %>
+        <div class="col-sm-12">
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title mb-4">testimonials.name</h5>
+                  <div class="mb-1">
+                     <p>testimonials.message</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+        <% } %>
+    <% } else { %>
+    <div class="col-sm-12">
+        <div class="card">
+           <div class="card-body">
+              <div class="mb-1 d-flex justify-content-between">
+                <p>Wow... such emptyness...</p>
+                <a href="/admin/category/testimonials/add" class="btn btn-success">Add</a>
+              </div>
+           </div>
+        </div>
+     </div>
+    <% } %>
+</div>

@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/login" method="post">
-        <input type="text" name="email" placeholder="Email"/>
-        <input type="text" type="password" name="password" placeholder="Password"/>
-        <input type="hidden" value="<%= csrfToken%>" name="_csrf">
-        <button type="submit"> Login</button>
-    </form>
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
-</body>
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/signin.css">
+   </head>
+   <body>
+    <main class="form-signin">
+        <form action="/login" method="post">
+          <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      
+          <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+      
+         
+          <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 2009–2021</p>
+        </form>
+      </main>
+    <%- include('../includes/footer.ejs') %>
+   </body>
 </html>

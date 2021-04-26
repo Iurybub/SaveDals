@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
+const Testimonial = require("../models/testimonial");
 const fileHelper = require("../utils/file");
 exports.getDashboard = (req, res, next) => {
   let animals;
@@ -180,11 +181,42 @@ exports.getQuestions = (req, res, next) => {
         pageTitle: "Admin | Questions",
         questions: questions,
         path: "/",
-        pageAbout: "Dashboard",
+        pageTitle: "Admin | Questions",
+        pageAbout: "Questions",
         user: req.session.user,
       });
     })
     .catch((err) => console.log(err));
 };
 
-exports.getPending = (req, res, next) => {};
+exports.getPending = (req, res, next) => {
+  Request.find()
+    .then((questions) => {
+      res.render("admin/questions", {
+        questions: questions,
+        path: "/",
+        pageTitle: "Admin | Questions",
+        pageAbout: "Pending Adoption & Fostering Requests",
+        user: req.session.user,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+// UI Related Requests
+
+exports.getTestimonials = (req, res, next) => {
+  Testimonial.find()
+    .then((testimonials) => {
+      res.render("admin/testimonials", {
+        testimonials: testimonials,
+        pageTitle: "Admin | Testimonials",
+        pageAbout: "Adopters Testimonials",
+        user: req.session.user,
+        csrfToken: req.csrfToken(),
+        path: "/",
+      });
+    })
+    .catch();
+};
+exports.getGallery = (req, res, next) => {};
