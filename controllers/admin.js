@@ -29,7 +29,7 @@ exports.getDashboard = (req, res, next) => {
               questions = question;
             })
             .then(() => {
-              return res.render("admin/index", {
+              return res.render("admin/Dashboard", {
                 pageTitle: "Admin | Dasboard",
                 animals: animals,
                 questions: questions,
@@ -60,55 +60,45 @@ exports.getAnimals = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.getAdd = (req, res, next) => {
+exports.getAddAnimals = (req, res, next) => {
   Animal.find()
     .limit(5)
     .then((animals) => {
-      res.render("admin/add-animal", {
+      res.render("admin/Animals/edit", {
         animals: animals,
-        path: "/category/animals",
-        pageTitle: "Admin | Add Dals",
-        pageAbout: "Add New Dals",
+        editing: false,
         csrfToken: req.csrfToken(),
         user: req.user,
+        animal: {},
       });
     })
     .catch((err) => console.log(err));
 };
 
-exports.getEdit = (req, res, next) => {
-  const edit_mode = req.query.edit;
-  if (!edit_mode) {
-    return res.redirect("/admin");
+exports.getEditAnimals = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect("/");
   }
-  const animal_id = req.params.id;
-  Animal.findById(animal_id)
+  const ID = req.params.id;
+  Animal.findById(ID)
     .then((animal) => {
-      if (!animal) {
-        return res.redirect("/admin");
-      }
-      res.render("admin/edit-animal", {
-        pageTitle: `Edit ${animal.name}`,
-        pageAbout: `Edit ${animal.name}`,
-        edit_mode: edit_mode,
-        animal: animal,
-        path: "/admin/animals/edit",
-        user: req.user,
+      res.render("admin/Animals/edit", {
+        editting: true,
         csrfToken: req.csrfToken(),
+        user: req.user,
+        animal: animal,
+        editing: editMode,
       });
     })
     .catch((err) => console.log(err));
 };
-
-exports.postAdd = (req, res, next) => {
+exports.postAddAnimal = (req, res, next) => {
   const name = req.body.name;
   const image = req.file;
   const imageUrl = image.path;
   const age = req.body.age;
   const breed = req.body.breed;
-  const height = req.body.height;
-  const weight = req.body.weight;
-  const color = req.body.color;
   const description = req.body.description;
   console.log(imageUrl);
   const animal = new Animal({
@@ -117,106 +107,51 @@ exports.postAdd = (req, res, next) => {
     description: description,
     age: age,
     breed: breed,
-    height: height,
-    weight: weight,
-    color: color,
   });
   animal
     .save()
     .then((result) => {
-      console.log("Created Product");
-      res.redirect("/admin/category/animals");
+      console.log("Created Animal");
+      res.redirect("/admin");
     })
     .catch((err) => console.log(err));
 };
 
-exports.postEdit = (req, res, next) => {
-  const edit_mode = req.query.edit;
-  const id = req.params.id;
-  const updated_name = req.body.name;
+exports.postEditAnimal = (req, res, next) => {
+  const id = req.body.animalID;
+  const name = req.body.name;
   const image = req.file;
-  const updated_age = req.body.age;
-  const updated_breed = req.body.breed;
-  const updated_height = req.body.height;
-  const updated_weight = req.body.weight;
-  const updated_color = req.body.color;
-  const updated_description = req.body.description;
+  const age = req.body.age;
+  const breed = req.body.breed;
+  const description = req.body.description;
 
+  console.log(id);
   Animal.findById(id)
     .then((animal) => {
-      animal.name = updated_name;
-      if (imageUrl) {
+      if (image) {
+        fileHelper.deleteFile(animal.imageUrl);
         animal.imageUrl = image.path;
       }
-      animal.age = updated_age;
-      animal.breed = updated_breed;
-      animal.height = updated_height;
-      animal.weight = updated_weight;
-      animal.color = updated_color;
-      animal.description = updated_description;
+      animal.name = name;
+      animal.age = age;
+      animal.breed = breed;
+      animal.description = description;
 
       return animal.save().then(() => {
-        res.redirect("/admin/category/animals");
+        res.redirect("/admin");
       });
     })
     .catch((err) => console.log(err));
 };
 
-exports.postDelete = (req, res, next) => {
+exports.postDeleteAnimal = (req, res, next) => {
   const id = req.params.id;
   Animal.findById(id)
     .then((animal) => {
       fileHelper.deleteFile(animal.imageUrl);
       return Animal.deleteOne({ _id: id }).then(() => {
-        res.redirect("/admin/category/animals");
+        res.redirect("/admin");
       });
     })
     .catch((err) => console.log(err));
 };
-
-exports.getQuestions = (req, res, next) => {
-  Question.find()
-    .then((questions) => {
-      res.render("admin/questions", {
-        pageTitle: "Admin | Questions",
-        questions: questions,
-        path: "/",
-        pageTitle: "Admin | Questions",
-        pageAbout: "Questions",
-        user: req.session.user,
-      });
-    })
-    .catch((err) => console.log(err));
-};
-
-exports.getPending = (req, res, next) => {
-  Request.find()
-    .then((questions) => {
-      res.render("admin/questions", {
-        questions: questions,
-        path: "/",
-        pageTitle: "Admin | Questions",
-        pageAbout: "Pending Adoption & Fostering Requests",
-        user: req.session.user,
-      });
-    })
-    .catch((err) => console.log(err));
-};
-
-// UI Related Requests
-
-exports.getTestimonials = (req, res, next) => {
-  Testimonial.find()
-    .then((testimonials) => {
-      res.render("admin/testimonials", {
-        testimonials: testimonials,
-        pageTitle: "Admin | Testimonials",
-        pageAbout: "Adopters Testimonials",
-        user: req.session.user,
-        csrfToken: req.csrfToken(),
-        path: "/",
-      });
-    })
-    .catch();
-};
-exports.getGallery = (req, res, next) => {};

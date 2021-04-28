@@ -23,18 +23,6 @@ const animalSchema = new Schema({
     type: String,
     required: true,
   },
-  height: {
-    type: Number,
-    required: true,
-  },
-  weight: {
-    type: Number,
-    required: true,
-  },
-  color: {
-    type: String,
-    required: true,
-  },
   adopted: {
     type: Boolean,
     required: false,

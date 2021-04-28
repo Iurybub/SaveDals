@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="card-body">
+       <!-- title -->
+       <div class="d-md-flex align-items-center">
+          <div>
+             <h4 class="card-title">Dalmatians</h4>
+             <h5 class="card-subtitle">Pets upp for adoption &amp; foster</h5>
+          </div>
+          <div class="ml-auto">
+            <a href="/admin/category/animals/add" class="btn btn-sm btn-success">Add</a>
+          </div>
+       </div>
+       <!-- title -->
+    </div>
+    <div class="table-responsive">
+       <table class="table v-middle">
+          <thead>
+             <tr class="bg-light">
+                <th class="border-top-0">Dog</th>
+                <th class="border-top-0">Breed</th>
+                <th class="border-top-0">Status</th>
+                <th class="border-top-0"></th>
+                <th class="border-top-0"></th>
+             </tr>
+          </thead>
+          <tbody>
+           <% if (animals.length > 0 ) {  %>
+            <% for (let animal of animals) { %>
+            <tr>
+              <td>
+                 <div class="d-flex align-items-">
+                   
+                    <div class="">
+                      <h4 class="m-b-0 font-16"></h4><%= animal.name %></h4>
+                    </div>
+                 </div>
+              </td>
+              <td><%= animal.breed %></td>
+              <td><%= animal.adopted %></td>
+              <td>
+                <label class="label label-danger">  
+                   <a class="btn btn-primary btn-sm" href="/admin/category/animals/edit/<%=animal.id%>/?edit=true" style="color: white">
+                   Edit
+                 </a></label>
+              </td>
+              <td>
+                <label class="label label-danger">  
+                   <form action="/admin/category/animals/actions/delete/<%= animal.id %>" method="post">
+                      <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+                      <button  type="submit" class="btn btn-sm  btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg></button>
+                   </form>
+                </label>
+              </td>
+           </tr>
+           
+            <% } %>
+           <% } else { %>
+            
+          </thead>
+          <tbody>
+              <td class="d-flex align-items-center mt-0 mb-0">
+                  <p class="m-0">Wow... who let the dogs out?</p>
+              </td>
+            <% } %>
+          </tbody>
+       </table>
+    </div>
+ </div>

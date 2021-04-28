@@ -1,0 +1,119 @@
+<%- include('../../includes/head.ejs') %>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="overlay"></div>
+		<!-- Sidebar --> 
+		<%- include('../../includes/ui/sidebar.ejs') %>
+		<!-- /#sidebar-wrapper -->
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+			<div id="content">
+				<div class="container-fluid p-0 px-lg-0 px-md-0">
+					<!-- Topbar -->
+					<%- include('../../includes/ui/top-bar.ejs') %>
+					<!-- End of Topbar -->
+					<!-- Begin Page Content -->
+					<div class="container px-lg-4">
+						<div class="row">
+							<div class="col-md-12 mt-lg-4 mt-4">
+								<!-- Page Heading -->
+								<div class="d-sm-flex align-items-center justify-content-between mb-4">
+									<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+									<a  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> 
+									Generate Report</a>
+								</div>
+							</div>
+							<%- include('../../includes/ui/sub-menu.ejs') %>
+							<!-- column -->
+							<div class="col-md-12 mt-4">
+								<main>
+                                  <div class="card">
+                                    <div class="card-body">
+                                        <div class="py-5 text-center">
+                                            <img class="d-block mx-auto mb-4 p-4 " src="/assets/logo.png" alt="Save The dals Logo" width="200">
+                                            <h2>Listing form</h2>
+                                            <p class="lead">Below is a form to list an animal up for adoption. Please follow the format and make sure to fill out all of the firlds for the best user expirience</p>
+                                          </div>
+                                      
+                                          <div class="row g-5">
+                                           
+                                            <div class="col-12">
+                                              <form class="needs-validation" action="/admin/category/animals/actions/<% if (editing) { %>edit<% } else { %>add<% } %>" method="post" enctype="multipart/form-data">
+                                                <div class="row g-3">
+                                                  <div class="col-sm-6">
+                                                    <label for="firstName" class="form-label">Dog's Name</label>
+                                                    <input  value="<% if (editing) { %><%= animal.name %><% } %>" type="text" name="name" class="form-control" id="firstName">
+                                                    <div class="invalid-feedback">
+                                                      Valid first name is required.
+                                                    </div>
+                                                  </div>
+                                      
+                                                  <div class="col-sm-6">
+                                                    <label for="lastName" class="form-label">Breed</label>
+                                                    <input value="<% if (editing) { %><%= animal.breed %><% } %>" type="text" name="breed" class="form-control" id="lastName" placeholder="" value="" required>
+                                                    <div class="invalid-feedback">
+                                                      Valid last name is required.
+                                                    </div>
+                                                  </div>
+                                      
+                                                  <div class="col-12">
+                                                    <label for="username" class="form-label">Image</label>
+                                                    <div class="input-group has-validation">
+                                                        <button type="button" class="btn mt-2 mb-2" style="width: 100%;" id="imageButton">Upload Image</button>
+                                                        <input type="file" name="image" class="form-control" hidden="hidden" id="fileUpload" >
+                                                    <div class="invalid-feedback">
+                                                        An Image is required.
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                      
+                                                  <div class="col-12">
+                                                    <label for="age" class="form-label">Age <span class="text-muted">(Optional)</span></label>
+                                                    <input value="<% if (editing) { %><%= animal.age %><% } %>"  type="age" name="age" class="form-control" id="age" >
+                                                    <div class="invalid-feedback">
+                                                      Please enter a valid email address for shipping updates.
+                                                    </div>
+                                                  </div>
+                                      
+                                                  <div class="col-12">
+                                                    <label for="address" class="form-label">Description</label>
+                                                    <textarea type="text" name="description" class="form-control" id="textarea" rows="5"  required>
+                                                        <% if (editing) { %><%= animal.description %><% } %>
+                                                    </textarea>
+                                                    <div class="invalid-feedback">
+                                                      Please enter a description
+                                                    </div>
+                                                  </div>
+                                      
+                                      
+                                                 
+                                                </div>
+                                                <hr class="my-4">
+                                                <input type="hidden" name="animalID" value="<%= animal._id %>"  />
+                                                <input type="hidden" value="<%= csrfToken%>" name="_csrf" />
+                                                <button class="w-100 btn btn-primary btn-lg" type="submit"><% if (editing) { %>Update<% } else { %>Continue Listing<% } %></button>
+                                              </form>
+                                            </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                  </main>
+							</div>
+						</div>
+					</div>
+				</div>
+	<%- include('../../includes/footer.ejs') %>
+    <script>
+        const imageButton = document.getElementById('imageButton')
+        const fileUpload = document.getElementById('fileUpload')
+        imageButton.addEventListener('click', () => {
+            fileUpload.click();
+            console.log("It works again bc why not?")
+        })
+        fileUpload.addEventListener('change', () => {
+            imageButton.innerHTML = fileUpload.value.split("\\").pop()
+        })
+    </script>
+</body>
+</html>

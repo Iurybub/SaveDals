@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="overlay"></div>
+		<!-- Sidebar --> 
+		<%- include('../includes/ui/sidebar.ejs') %>
+		<!-- /#sidebar-wrapper -->
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+			<div id="content">
+				<div class="container-fluid p-0 px-lg-0 px-md-0">
+					<!-- Topbar -->
+					<%- include('../includes/ui/top-bar.ejs') %>
+					<!-- End of Topbar -->
+					<!-- Begin Page Content -->
+					<div class="container px-lg-4">
+						<div class="row">
+							<div class="col-md-12 mt-lg-4 mt-4">
+								<!-- Page Heading -->
+								<div class="d-sm-flex align-items-center justify-content-between mb-4">
+									<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+									<a  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> 
+									Generate Report</a>
+								</div>
+							</div>
+							<%- include('../includes/ui/sub-menu.ejs') %>
+							<!-- column -->
+							<div class="col-md-12 mt-4">
+								<%- include('./Animals/list.ejs') %>
+							</div>
+							<div class="col-md-12 mt-4">
+								<%- include('./Questions/list.ejs') %>
+							</div>
+							<div class="col-md-12 mt-4">
+								<%- include('./Pendings/list.ejs') %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%- include('../includes/footer.ejs') %>
+</body>
+</html>

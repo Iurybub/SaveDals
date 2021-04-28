@@ -5,33 +5,26 @@ const router = express.Router();
 const ensureAuth = require("../middleware/ensureAuth");
 
 router.get("/", ensureAuth, adminController.getDashboard); //Done
-router.get("/category/animals/add", ensureAuth, adminController.getAdd); // Done
-router.get("/category/animals", ensureAuth, adminController.getAnimals); // Done
-router.get("/category/animals/edit/:id", ensureAuth, adminController.getEdit); //Done
-router.get("/category/questions", ensureAuth, adminController.getQuestions);
-
+router.get("/category/animals", ensureAuth, adminController.getAnimals);
+router.get("/category/animals/add", ensureAuth, adminController.getAddAnimals);
+router.get(
+  "/category/animals/edit/:id",
+  ensureAuth,
+  adminController.getEditAnimals
+);
 router.post(
   "/category/animals/actions/add",
   ensureAuth,
-  adminController.postAdd
+  adminController.postAddAnimal
 );
 router.post(
-  "/category/animals/actions/edit/:id",
+  "/category/animals/actions/edit",
   ensureAuth,
-  adminController.postEdit
+  adminController.postEditAnimal
 );
 router.post(
   "/category/animals/actions/delete/:id",
   ensureAuth,
-  adminController.postDelete
+  adminController.postDeleteAnimal
 );
-
-router.get("/category/questions", ensureAuth, adminController.getQuestions);
-router.get(
-  "/category/testimonials",
-  ensureAuth,
-  adminController.getTestimonials
-);
-router.get("/category/pending", ensureAuth, adminController.getPending);
-
 module.exports = router;

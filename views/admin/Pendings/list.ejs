@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="card-body">
+       <!-- title -->
+       <div class="d-md-flex align-items-center">
+          <div>
+             <h4 class="card-title">Requests</h4>
+             <h5 class="card-subtitle">Requests for adoption &amp; foster care</h5>
+          </div>
+          <div class="ml-auto">
+            
+          </div>
+       </div>
+       <!-- title -->
+    </div>
+    <div class="table-responsive">
+       <table class="table v-middle">
+          <thead>
+             <tr class="bg-light">
+                <th class="border-top-0">Name</th>
+                <th class="border-top-0">Email</th>
+                <th class="border-top-0">Subject</th>
+                <th class="border-top-0">Files Attached</th>
+             </tr>
+          </thead>
+          <tbody>
+           <% if (questions.length > 0 ) {  %>
+            <% for (let q of questions) { %>
+            <tr>
+              <td>
+                 <div class="d-flex align-items-center">
+                    <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                    <div class="">
+                      <h4 class="m-b-0 font-16"></h4><%= q.name %></h4>
+                    </div>
+                 </div>
+              </td>
+              <td><%= q.email %></td>
+              <td><%= q.subject %></td>
+              <td>
+               <p>
+                  <a class="btn btn-primary" style="color: white">
+                    View
+                  </a>
+                </p>
+              </td>
+           </tr>
+ 
+            <% } %>
+           <% } else { %>
+            
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                 <div class="d-flex align-items-center">
+                    <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
+                    <div class="">
+                      <h4 class="m-b-0 font-16">N/A</h4>
+                    </div>
+                 </div>
+              </td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>
+                 <label class="label label-danger">N/A</label>
+              </td>
+           </tr>
+            <% } %>
+          </tbody>
+       </table>
+    </div>
+ </div>
