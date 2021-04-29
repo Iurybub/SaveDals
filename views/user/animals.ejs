@@ -1,12 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<%- include('../includes/user-head.ejs') %>
 </head>
 <body>
-    animals
+    <%- include('../includes/user-nav.ejs') %>
+    <main>
+        <div class="container py-4">
+           
+            <div class="p-5 mb-4 bg-light rounded-3">
+              <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Dalmatians up for adoption</h1>
+                <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                <button class="btn btn-primary btn-lg" type="button">Example button</button>
+              </div>
+            </div>
+            <div class="row align-items-md-stretch">
+             <% if (animals.length > 0) { %>
+             <% for (let animal of animals) { %>
+                <div class="col-md-6" >
+                    <div class="h-100 p-5 bg-light border rounded-3">
+                        <img src="\<%= animal.imageUrl %>" alt="" class="img-fluid  mb-3 rounded-3">
+                      <h2><%= animal.name %></h2>
+                      <p><%= animal.description %></p>
+                      <a class="btn btn-outline-secondary" type="button" href="/animals/<%= animal._id %>">View</a>
+                    </div>
+                  </div>
+             <% } %>
+             <%} else { %>
+            
+             <%}%>
+            </div>
+    </main>
 </body>
 </html>

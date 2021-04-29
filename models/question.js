@@ -23,6 +23,9 @@ const questionSchema = new Schema({
     type: String,
     required: false,
   },
+  created_at: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Question", questionSchema);

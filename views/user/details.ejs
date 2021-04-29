@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<%- include('../includes/user-head.ejs') %>
 </head>
 <body>
-    Details
+   <%- include('../includes/user-nav.ejs') %>
+   <main>
+     <div class="container">
+        <% if (animal) { %>
+            <div class="col-md-6" >
+               <div class="h-100 p-5 bg-light border rounded-3">
+                  <img src="<%= animal.imageUrl %>" alt="" class="img-fluid  mb-3 rounded-3">
+                  <h2><%= animal.name %></h2>
+                  <p><%= animal.description %></p>
+                  <a class="btn btn-outline-secondary" type="button" href="animals/<%= animal._id %>">View</a>
+               </div>
+            </div>
+            <%} else { %>
+            <h1>Something went wrong...</h1>
+            <%}%>
+            </div>
+     </div>
+   </main>
 </body>
 </html>

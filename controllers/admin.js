@@ -10,21 +10,21 @@ exports.getDashboard = (req, res, next) => {
   let requests;
   Animal.find()
     .limit(5)
-    .sort({ date: -1 })
+    .sort("-created_at")
     .then((animal) => {
       animals = animal;
     })
     .then(() => {
       Request.find()
         .limit(5)
-        .sort({ date: -1 })
+        .sort("-created_at")
         .then((request) => {
           requests = request;
         })
         .then(() => {
           Question.find()
             .limit(5)
-            .sort({ date: -1 })
+            .sort("-created_at")
             .then((question) => {
               questions = question;
             })
@@ -100,6 +100,7 @@ exports.postAddAnimal = (req, res, next) => {
   const age = req.body.age;
   const breed = req.body.breed;
   const description = req.body.description;
+  const created_at = new Date();
   console.log(imageUrl);
   const animal = new Animal({
     name: name,
@@ -107,6 +108,7 @@ exports.postAddAnimal = (req, res, next) => {
     description: description,
     age: age,
     breed: breed,
+    created_at: created_at,
   });
   animal
     .save()
@@ -124,7 +126,7 @@ exports.postEditAnimal = (req, res, next) => {
   const age = req.body.age;
   const breed = req.body.breed;
   const description = req.body.description;
-
+  const created_at = new Date();
   console.log(id);
   Animal.findById(id)
     .then((animal) => {
@@ -136,6 +138,7 @@ exports.postEditAnimal = (req, res, next) => {
       animal.age = age;
       animal.breed = breed;
       animal.description = description;
+      animal.created_at = created_at;
 
       return animal.save().then(() => {
         res.redirect("/admin");

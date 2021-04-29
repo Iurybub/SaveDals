@@ -15,6 +15,9 @@ const testimonialSchema = new Schema({
     type: String,
     required: true,
   },
+  created_at: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Testimonial", testimonialSchema);

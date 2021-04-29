@@ -13,16 +13,22 @@ exports.getHome = (req, res, next) => {
 };
 
 exports.getAnimals = (req, res, next) => {
-  res.render("user/animals", {
-    pageTitle: "All Animals",
-    isAuth: req.session.isLoggedIn,
-  });
+  Animal.find()
+    .sort("-created_at")
+    .then((animals) => {
+      res.render("user/animals", {
+        pageTitle: "Animals - All",
+        animals: animals,
+        isAuth: req.session.isLoggedIn,
+      });
+    })
+    .catch((err) => console.log);
 };
 exports.getAnimalDetails = (req, res, next) => {
   const animalId = req.params.id;
   Animal.findById(animalId)
     .then((animal) => {
-      res.render("user/animals", {
+      res.render("user/details", {
         pageTitle: "All Animals",
         animal: animal,
         isAuth: req.session.isLoggedIn,
@@ -30,8 +36,6 @@ exports.getAnimalDetails = (req, res, next) => {
     })
     .catch((err) => res.redirect("/"));
 };
-
-// User POST methods
 
 exports.postQuestion = (req, res, next) => {
   let id_gen = letter_id.generateCustomLetterId(1, 10).toString();
@@ -51,7 +55,7 @@ exports.postQuestion = (req, res, next) => {
   question
     .save()
     .then(() => {
-      res.redirect("/question-succses");
+      res.redirect("/");
     })
     .catch((err) => {
       console.log(err);

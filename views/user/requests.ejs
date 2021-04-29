@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>request</title>
+</head>
+<body>
+    <div class="container clearfix">
+        <div class="heading-block center border-bottom-0 mx-auto" style="max-width: 640px">
+            <h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Contact Us</h3>
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
+        </div>
+        <form action="/animals/question" method="post" class="php-email-form">
+            <div class="form-row">
+              <div class="form-group col-12">
+                <label for="name">Your Name</label>
+                <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group col-12">
+                <label for="name">Your Email</label>
+                <input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validate"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Subject</label>
+              <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <label for="name">Message</label>
+              <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
+              <div class="validate"></div>
+            </div>
+            <div class="mb-3">
+              <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+            </div>
+            <div class="text-center"><button type="submit" class="btn btn-outline-success">Send Message</button></div>
+          </form>
+    </div>
+</body>
+</html>

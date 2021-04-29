@@ -1,92 +1,24 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700|Chewy&display=swap" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-
-	<!-- Pet Demo Specific Stylesheet -->
-	<link rel="stylesheet" href="pet/pet.css" type="text/css" />
-	<link rel="stylesheet" href="pet/css/fonts.css" type="text/css" />
-
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-
-	<link rel="stylesheet" href="css/custom.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="css/colors.php?color=f0a540" type="text/css" />
-
-	<!-- Document Title
-	============================================= -->
-	<title>Save Dals</title>
-
+<%- include('../includes/user-head.ejs') %>
 </head>
 
 <body class="stretched">
 
-	<!-- Document Wrapper
-	============================================= -->
 	<div id="wrapper" class="clearfix">
 
-		<!-- Header
-		============================================= -->
-		<header id="header" class="transparent-header dark" data-sticky-class="not-dark">
-			<div id="header-wrap">
-				<div class="container">
-					<div class="header-row">
-
-						<!-- Logo
-						============================================= -->
-						<div id="logo">
-							<a href="index.html" class="standard-logo" data-dark-logo="demos/pet/images/logo-dark.png">SaveDals</a>
-							<a href="index.html" class="retina-logo" data-dark-logo="demos/pet/images/logo-dark@2x.png">SaveDals</a>
-						</div><!-- #logo end -->
-
-						<div id="primary-menu-trigger">
-							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
-						</div>
-
-						<!-- Primary Navigation
-						============================================= -->
-						<nav class="primary-menu not-dark">
-
-							<ul class="menu-container">
-								<li class="menu-item"><a class="menu-link" href="#"><div>About us</div></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>Adopt &amp; Foster</div></a></li>
-								<li class="menu-item"><a class="menu-link" href="#"><div>FAQs</div></a></li>
-								<li class="menu-item bg-color"><a class="menu-link" href="#"><div>Get Started</div></a></li>
-							</ul>
-
-						</nav><!-- #primary-menu end -->
-
-					</div>
-				</div>
-			</div>
-			<div class="header-wrap-clone"></div>
-		</header><!-- #header end -->
-
-		<!-- Slider
-		============================================= -->
-		<section id="slider" class="slider-element min-vh-60 min-vh-md-100 include-header" style="background: url('assets/dal.jpg') center right no-repeat; background-size: cover;">
+		<%- include('../includes/user-nav.ejs') %>
+		<section id="slider" class="slider-element min-vh-60 min-vh-md-100 include-header" style="background: url('demos/pet/images/hero-image.jpg') center right no-repeat; background-size: cover;">
 			<div class="slider-inner">
 
 				<div class="vertical-middle">
 					<div class="container py-5">
 						<div class="emphasis-title dark m-0">
 
-							<h2 style="font-size: 40px; line-height: 1.4; font-weight: 600; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">Dedicated to Rescue, Rehabilitation &amp; <br> Re-homing of Dalmatians Through Fostering &amp; Adoption</h2><br>
-							<p class="font-weight-light d-none d-md-block" style="font-size: 16px; opacity: .7;">Nisl blandit adipisci gravida blandit soluta, explicabo orci, distinctio <br>duis unde provident suspendisse orci? Recusandae! Proident,<br>quos do mi cupidatat.</p>
+							<h1 style="font-size: 40px; line-height: 1.4; font-weight: 600; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">SAVE THE DALMATIANS &amp; <br> OTHERS CANINE RESCUE, INC.</h1><br>
+							<p class="font-weight-light d-none d-md-block" style="font-size: 16px; opacity: .7;">Dedicated to Rescue, Rehabilitation & Re-homing of Dalmatians <br> Through Fostering & Adoption
+								A Non-Profit 501(c)(3)</p>
 							<a href="#" class="button button-large button-rounded ml-0">Join Us Now</a><span class="leftmargin-sm">+</span>
-							<a href="#" class="button bg-transparent shadow-none"><i class="icon-gift" style="width: 40px; font-size: 40px; top: 10px;"></i></a>
-							<br><em><small style="opacity: 0.4;">Every month a surprise gift*</small></em>
+							
+							
 
 						</div>
 					</div>
@@ -115,10 +47,10 @@
 								<div class="col-lg-3 col-md-6 bottommargin-sm">
 									<div class="feature-box media-box fbox-bg">
 										<div class="fbox-media">
-											<a href="#"><img src="assets/rescue.jpg" alt="Rescue dogs"></a>
+											<a href="#"><img src="demos/pet/images/services/1.jpg" alt="Featured Box Image"></a>
 										</div>
 										<div class="fbox-content border-0">
-											<h3 class="nott ls0 font-weight-semibold">Rescue<span class="subtitle font-weight-light ls0">Globally parallel task premium infomediaries</span></h3>
+											<h3 class="nott ls0 font-weight-semibold">Adopt a Dog<span class="subtitle font-weight-light ls0">Globally parallel task premium infomediaries</span></h3>
 											<a href="#" class="button-link border-0 color">Read More</a>
 										</div>
 									</div>
@@ -127,10 +59,10 @@
 								<div class="col-lg-3 col-md-6 bottommargin-sm">
 									<div class="feature-box media-box fbox-bg">
 										<div class="fbox-media">
-											<a href="#"><img src="assets/rehab.jpg" alt="Dog tretment"></a>
+											<a href="#"><img src="demos/pet/images/services/2.jpg" alt="Featured Box Image"></a>
 										</div>
 										<div class="fbox-content border-0">
-											<h3 class="nott ls0 font-weight-semibold">Rehabilitation<span class="subtitle font-weight-light ls0">Energistically visualize market-driven. And a little  </span></h3>
+											<h3 class="nott ls0 font-weight-semibold">Pet Nutritionists<span class="subtitle font-weight-light ls0">Energistically visualize market-driven.</span></h3>
 											<a href="#" class="button-link border-0 color">Read More</a>
 										</div>
 									</div>
@@ -139,10 +71,10 @@
 								<div class="col-lg-3 col-md-6 bottommargin-sm">
 									<div class="feature-box media-box fbox-bg">
 										<div class="fbox-media">
-											<a href="#"><img src="assets/rehome.jpg" alt="Re-homing a dog"></a>
+											<a href="#"><img src="demos/pet/images/services/3.jpg" alt="Featured Box Image"></a>
 										</div>
 										<div class="fbox-content border-0">
-											<h3 class="nott ls0 font-weight-semibold">Re-homing<span class="subtitle font-weight-light ls0">Enthusiastically iterate enabled portals after.</span></h3>
+											<h3 class="nott ls0 font-weight-semibold">Find a Pet Sitter<span class="subtitle font-weight-light ls0">Enthusiastically iterate enabled portals after.</span></h3>
 											<a href="#" class="button-link border-0 color">Read More</a>
 										</div>
 									</div>
@@ -151,10 +83,10 @@
 								<div class="col-lg-3 col-md-6 bottommargin-sm">
 									<div class="feature-box media-box fbox-bg">
 										<div class="fbox-media">
-											<a href="#"><img src="assets/adopted.jpg" alt="Dog Adoption and fostering"></a>
+											<a href="#"><img src="demos/pet/images/services/4.jpg" alt="Featured Box Image"></a>
 										</div>
 										<div class="fbox-content border-0">
-											<h3 class="nott ls0 font-weight-semibold">Adption &amp; Fostering<span class="subtitle font-weight-light ls0">Enthusiastically iterate enabled portals after.</span></h3>
+											<h3 class="nott ls0 font-weight-semibold">Health &amp; Wellbeing<span class="subtitle font-weight-light ls0">Enthusiastically iterate enabled portals after.</span></h3>
 											<a href="#" class="button-link border-0 color">Read More</a>
 										</div>
 									</div>
@@ -163,251 +95,44 @@
 						</div>
 					</div>
 				</div>
-				<div class="container topmargin clearfix">
-					<div class="row clearfix">
-						<div class="col-lg-6">
-							<div class="heading-block border-bottom-0 topmargin-sm mb-0">
-								<h2 class="font-secondary ls1 nott font-weight-normal">Our Happily Adopted Dals</h2>
-								<span>See real stories from adopters. Save daalmatians and others!</span>
-								<a href="#" class="button button-large button-rounded topmargin-sm ml-0">Adoption &amp; Fostering</a>
-								<div class="line line-sm"></div>
+				
+				<%- include('../includes/user-testimonials.ejs') %>
+
+				<div class="section mb-0 clearfix">
+					<div class="heading-block center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
+						<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Gallery</h3>
+						<span class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
+					</div>
+					<div class="container">
+						<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-inner">
+							  <div class="carousel-item active">
+								<img src="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg" class="d-block w-100" alt="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg">
+							  </div>
+							  <div class="carousel-item">
+								<img src="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg" class="d-block w-100" alt="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg">
+							  </div>
+							  <div class="carousel-item">
+								<img src="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg" class="d-block w-100" alt="https://colorlib.com/wp/wp-content/uploads/sites/2/divi-photo-gallery-website-template.jpg">
+							  </div>
 							</div>
-							<div class="row clearfix">
-								<div class="col-md-4">
-									<div>
-										<div class="counter counter-small color"><span data-from="10" data-to="155" data-refresh-interval="50" data-speed="1000"></span>+</div>
-										<h5 class="color font-weight-semibold nott mt-0" style="font-size: 16px;">Happy Adopters</h5>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div>
-										<div class="counter counter-small" style="color: #22c1c3;"><span data-from="10" data-to="145" data-refresh-interval="50" data-speed="700"></span>+</div>
-										<h5 class="font-weight-semibold nott mt-0" style="color: #22c1c3; font-size: 16px;">Pets Hosted</h5>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div>
-										<div class="counter counter-small" style="color: #BD3F32;"><span data-from="10" data-to="50" data-refresh-interval="85" data-speed="1200"></span>+</div>
-										<h5 class="font-weight-semibold nott mt-0" style="color: #BD3F32; font-size: 16px;">Dals Rescued</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-6">
-							<div id="oc-testi" class="owl-carousel testimonials-carousel carousel-widget" data-nav="false" data-animate-in="slideInUp" data-animate-out="slideOutUp" data-autoplay="5000" data-loop="true" data-stage-padding="5" data-margin="10" data-items-sm="1" data-items-md="1" data-items-xl="1">
-
-								<div class="oc-item">
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/1.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Ligula scelerisque, tempus dicta eros dolorum itaque fugit, tempore pellentesque, leo dolor, aenean, inceptos aptent nostra adipisci harum etiam explicabo.</p>
-											<div class="testi-meta">
-												John Doe &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/2.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Sint quae anim enim quaerat! Assumenda esse metus torquent, senectus similique tempor? Massa lacus a, dignissim sequi officiis, elementum non.</p>
-											<div class="testi-meta">
-												John Doe  &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="oc-item">
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/1.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Ligula scelerisque, tempus dicta eros dolorum itaque fugit, tempore pellentesque, leo dolor, aenean, inceptos aptent nostra adipisci harum etiam explicabo.</p>
-											<div class="testi-meta">
-												John Doe &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/2.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Sint quae anim enim quaerat! Assumenda esse metus torquent, senectus similique tempor? Massa lacus a, dignissim sequi officiis, elementum non.</p>
-											<div class="testi-meta">
-												John Doe  &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="oc-item">
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/3.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Placeat ultrices perferendis omnis consequat molestie quos pretium! Donec deserunt ratione ultrices laborum vehicula rutrum deserunt! Torquent officiis? Et occaecati.</p>
-											<div class="testi-meta">
-												John Doe &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-									<div class="testimonial topmargin-sm">
-										<div class="testi-image">
-											<a href="#"><img src="demos/pet/images/testimonials/4.jpg" alt="Customer Testimonails"></a>
-										</div>
-										<div class="testi-content">
-											<p>Occaecat autem turpis mollis ac nam cubilia, culpa adipiscing per cubilia porta fugit numquam dignissim sequi. Aspernatur aliquip. Ornare molestias.</p>
-											<div class="testi-meta">
-												John Doe &middot;
-												<span>XYZ Inc.</span>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							  <span class="visually-hidden">Next</span>
+							</button>
+						  </div>
 					</div>
 				</div>
-				<section id="portfolio" class="portfolio">
-					<div class="container" data-aos="fade-up">
-			  
-						<div class="section mb-0 clearfix">
-							<div class="heading-block center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
-								<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Gallery</h3>
-								<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
-							</div>
-						</div>
-			  
-					
-			  
-					  <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						  <img src="assets/gallery/dal1.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>App 1</h4>
-							<p>App</p>
-							<a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						  <img src="assets/gallery/dal7.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Web 3</h4>
-							<p>Web</p>
-							<a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						  <img src="assets/gallery/dal9.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>App 2</h4>
-							<p>App</p>
-							<a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						  <img src="assets/gallery/dal2.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Card 2</h4>
-							<p>Card</p>
-							<a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						  <img src="assets/gallery/dal5.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Web 2</h4>
-							<p>Web</p>
-							<a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-						  <img src="assets/gallery/dal6.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>App 3</h4>
-							<p>App</p>
-							<a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						  <img src="assets/gallery/dal3.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Card 1</h4>
-							<p>Card</p>
-							<a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-card">
-						  <img src="assets/gallery/dal8.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Card 3</h4>
-							<p>Card</p>
-							<a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-						<div class="col-lg-4 col-md-6 portfolio-item filter-web">
-						  <img src="assets/gallery/dal9.jpg" class="img-fluid" alt="">
-						  <div class="portfolio-info">
-							<h4>Web 3</h4>
-							<p>Web</p>
-							<a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-							<a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-						  </div>
-						</div>
-			  
-					  </div>
-			  
-					</div>
-				  </section><!-- End Portfolio Section -->
 
-				<div class="section dark parallax m-0" style="background-image: url('assets/cta.jpg'); background-size: cover;" >
-					<div class="container center clearfix">
-						<div class="row clearfix">
-							<div class="col-lg-6">
-								<div class="heading-block border-bottom-0 mb-0">
-									<div class="before-heading text-lowercase ls1" style="color: #FFF; font-style: normal;">want to Adopt your a best friend?</div>
-									<h3 class="nott font-secondary font-weight-normal" style="font-size: 32px;">Unconditional love is as close as your nearest Shelter.</h3>
-									<a href="#" class="button button-large button-circle button-border button-white button-light topmargin-sm ml-0">Get a Pet Now</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
+
+				
+
+			
 
 				<div class="container topmargin-lg clearfix">
 					<div class="heading-block center border-bottom-0 mx-auto" style="max-width: 640px">
@@ -456,81 +181,45 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<section id="contact" class="contact">
-				<div class="container">
-		  
-				  <div class="section-title">
-					<span>Contact</span>
-					<h2>Contact</h2>
-					<p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
-				  </div>
-		  
-				  <div class="row">
-		  
-					<div class="col-lg-5 d-flex align-items-stretch">
-					  <div class="info">
-						<div class="address">
-						  <i class="icofont-google-map"></i>
-						  <h4>Location:</h4>
-						  <p>A108 Adam Street, New York, NY 535022</p>
+
+				<div class="section m-0 bg-transparent clearfix">
+					<div class="container clearfix">
+						<div class="heading-block center border-bottom-0 mx-auto" style="max-width: 640px">
+							<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Contact Us</h3>
+							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
 						</div>
-		  
-						<div class="email">
-						  <i class="icofont-envelope"></i>
-						  <h4>Email:</h4>
-						  <p>info@example.com</p>
-						</div>
-		  
-						<div class="phone">
-						  <i class="icofont-phone"></i>
-						  <h4>Call:</h4>
-						  <p>+1 5589 55488 55s</p>
-						</div>
-		  
-						<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-					  </div>
-		  
+						<form action="/animals/question" method="post" class="php-email-form">
+							<div class="form-row">
+							  <div class="form-group col-12">
+								<label for="name">Your Name</label>
+								<input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+								<div class="validate"></div>
+							  </div>
+							  <div class="form-group col-12">
+								<label for="name">Your Email</label>
+								<input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+								<div class="validate"></div>
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label for="name">Subject</label>
+							  <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+							  <div class="validate"></div>
+							</div>
+							<div class="form-group">
+							  <label for="name">Message</label>
+							  <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
+							  <div class="validate"></div>
+							</div>
+							<div class="mb-3">
+							  <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+							</div>
+							<div class="text-center"><button type="submit" class="btn btn-outline-success">Send Message</button></div>
+						  </form>
 					</div>
-		  
-					<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-					  <form action="/animals/question" method="post" class="php-email-form">
-						<div class="form-row">
-						  <div class="form-group col-md-6">
-							<label for="name">Your Name</label>
-							<input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-							<div class="validate"></div>
-						  </div>
-						  <div class="form-group col-md-6">
-							<label for="name">Your Email</label>
-							<input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
-							<div class="validate"></div>
-						  </div>
-						</div>
-						<div class="form-group">
-						  <label for="name">Subject</label>
-						  <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-						  <div class="validate"></div>
-						</div>
-						<div class="form-group">
-						  <label for="name">Message</label>
-						  <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
-						  <div class="validate"></div>
-						</div>
-						<div class="mb-3">
-						  <div class="loading">Loading</div>
-						  <div class="error-message"></div>
-						  <div class="sent-message">Your message has been sent. Thank you!</div>
-						  <input type="hidden" value="<%= csrfToken%>" name="_csrf">
-						</div>
-						<div class="text-center"><button type="submit">Send Message</button></div>
-					  </form>
-					</div>
-		  
-				  </div>
-		  
 				</div>
-			  </section><!-- End Contact Section -->
+
+			</div>
 		</section><!-- #content end -->
 
 		<!-- Footer
@@ -669,8 +358,19 @@
 			</div><!-- #copyrights end -->
 		</footer><!-- #footer end -->
 
-	</div>
-	<%- include('../includes/footer.ejs') %>
+	</div><!-- #wrapper end -->
 
+	<!-- Go To Top
+	============================================= -->
+
+	<!-- JavaScripts
+	============================================= -->
+	<script src="/js/jquery.js"></script>
+	<script src="/js/plugins.min.js"></script>
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="/js/functions.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

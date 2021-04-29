@@ -28,6 +28,9 @@ const animalSchema = new Schema({
     required: false,
     default: false,
   },
+  created_at: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Animal", animalSchema);
