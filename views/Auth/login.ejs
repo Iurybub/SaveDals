@@ -3,24 +3,28 @@
    </head>
    <body>
     <main class="form-signin">
-        <form action="/login" method="post">
-          <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-      
-          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+        <div class="container container-login">
+          <div class="row d-flex justify-content-center">
+            <form action="/login" method="post">
+              <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
+              <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          
+              <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+          
+             
+              <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+              <p class="mt-5 mb-3 text-muted">&copy; 2009–2021</p>
+            </form>
           </div>
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-          </div>
-      
-         
-          <input type="hidden" value="<%= csrfToken%>" name="_csrf">
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-          <p class="mt-5 mb-3 text-muted">&copy; 2009–2021</p>
-        </form>
+        </div>
       </main>
     <%- include('../includes/footer.ejs') %>
    </body>

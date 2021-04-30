@@ -19,10 +19,10 @@ const requestSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Animal",
   },
-  paperword: {
-    type: String,
-    required: true,
-  },
+  // paperworkUrl: {
+  //   type: String,
+  //   required: true,
+  // },
   created_at: {
     type: Date,
   },

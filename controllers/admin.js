@@ -101,7 +101,7 @@ exports.postAddAnimal = (req, res, next) => {
   const breed = req.body.breed;
   const description = req.body.description;
   const created_at = new Date();
-  console.log(imageUrl);
+  console.log(req.file);
   const animal = new Animal({
     name: name,
     imageUrl: imageUrl,

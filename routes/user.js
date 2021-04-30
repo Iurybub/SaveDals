@@ -8,5 +8,6 @@ router.get("/animals", userController.getAnimals);
 router.get("/animals/:id", userController.getAnimalDetails);
 // Posts
 router.post("/animals/question", userController.postQuestion);
+router.post("/animals/adopt", userController.postRequest);
 
 module.exports = router;

@@ -55,7 +55,8 @@ const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/pdf"
   ) {
     cb(null, true);
   } else {
@@ -63,11 +64,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).array("file", 10)
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
-);
 
 app.set("view engine", "ejs");
 app.set("views", "views");

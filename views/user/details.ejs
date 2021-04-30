@@ -3,21 +3,99 @@
 <body>
    <%- include('../includes/user-nav.ejs') %>
    <main>
-     <div class="container">
+     <div class="container d-flex align-items-center" style="min-height:80vh;">
         <% if (animal) { %>
-            <div class="col-md-6" >
-               <div class="h-100 p-5 bg-light border rounded-3">
-                  <img src="<%= animal.imageUrl %>" alt="" class="img-fluid  mb-3 rounded-3">
-                  <h2><%= animal.name %></h2>
-                  <p><%= animal.description %></p>
-                  <a class="btn btn-outline-secondary" type="button" href="animals/<%= animal._id %>">View</a>
-               </div>
-            </div>
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-12 col-lg-6 p-3">
+                  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                     <div class="carousel-inner">
+                       <div class="carousel-item active">
+                         <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*" class="d-block w-100" alt="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*">
+                       </div>
+                       <div class="carousel-item">
+                         <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*" class="d-block w-100" alt="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*">
+                       </div>
+                       <div class="carousel-item">
+                         <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*" class="d-block w-100" alt="...">
+                       </div>
+                     </div>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                       <span class="visually-hidden">Previous</span>
+                     </button>
+                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                       <span class="visually-hidden">Next</span>
+                     </button>
+                   </div>
+                 </div>
+                 <div class="col-md-12  col-lg-6 p-3">
+                  <div class="container content">
+                     <h3><%= animal.name %></h3>
+                     <p><%= animal.description %></p>
+                  </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-lg-8">
+                    <!-- Request Form -->
+                  <form action="/animals/adopt"" method="post" enctype="multipart/form-data">
+                     <div class="row">
+                        <div class="mb-3 col-6">
+                           <label for="first_name" class="form-label">First Name</label>
+                           <input type="text" name="first_name" class="form-control" id="name" required>
+                         </div>
+                         <div class="mb-3 col-6">
+                           <label for="last_name" class="form-label">Last name</label>
+                           <input type="text" name="last_name" class="form-control" id="last_name" required>
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="mb-3 ">
+                           <label for="email" class="form-label">Email</label>
+                           <input type="email" name="email" class="form-control" id="email" required>
+                         </div>
+                     </div>
+                     <div class="mb-3">
+                       <label for="fileUpload" class="form-label">File Upload</label>
+                       <button type="button" class="btn btn-secondary mt-2 mb-2" style="width: 100%;" id="imageButton">Upload Application</button>
+                       <input type="file" name="file" class="form-control" hidden="hidden" id="fileUpload" >
+                     </div>
+                     <input type="hidden" value="<%= animal._id %>" name="animal"/>
+                     <input type="hidden" value="<%= csrfToken%>" name="_csrf" />
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                   </form>
+                 </div>
+                 <div class="col-lg-4">
+                  <ul class="list-group">
+                     <li class="list-group-item">An item</li>
+                     <li class="list-group-item">A second item</li>
+                     <li class="list-group-item">A third item</li>
+                     <li class="list-group-item">A fourth item</li>
+                     <li class="list-group-item">And a fifth one</li>
+                   </ul>
+                 </div>
+              </div>
+           </div>
             <%} else { %>
             <h1>Something went wrong...</h1>
             <%}%>
             </div>
      </div>
    </main>
+   <script>
+      const imageButton = document.getElementById('imageButton')
+      const fileUpload = document.getElementById('fileUpload')
+      imageButton.addEventListener('click', () => {
+          fileUpload.click();
+          console.log("It works again bc why not?")
+      })
+      fileUpload.addEventListener('change', () => {
+          imageButton.innerHTML = fileUpload.value.split("\\").pop()
+      })
+  </script>
+<%- include('../includes/user-footer.ejs') %>
+
 </body>
 </html>

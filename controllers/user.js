@@ -31,6 +31,7 @@ exports.getAnimalDetails = (req, res, next) => {
       res.render("user/details", {
         pageTitle: "All Animals",
         animal: animal,
+        csrfToken: req.csrfToken(),
         isAuth: req.session.isLoggedIn,
       });
     })
@@ -61,26 +62,28 @@ exports.postQuestion = (req, res, next) => {
       console.log(err);
     });
 };
+
 exports.postRequest = (req, res, next) => {
-  const first_name = req.body.name;
+  const first_name = req.body.first_name;
   const last_name = req.body.last_name;
   const email = req.body.email;
   const animal = req.body.animal;
-  const paperwork = req.body.paperwork;
+  const paperwork = req.files;
+  console.log(req.files);
+  console.log([first_name, last_name, email, animal]);
 
-  const question = new Question({
+  const request = new Request({
     first_name: first_name,
     last_name: last_name,
     email: email,
-    subject: subject,
-    message: message,
+    animal: animal,
+    // paperworkUrl: paperworkUrl,
   });
-  question
+
+  request
     .save()
     .then(() => {
       res.redirect("/");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };

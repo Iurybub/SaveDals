@@ -16,7 +16,7 @@
 							<h1 style="font-size: 40px; line-height: 1.4; font-weight: 600; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">SAVE THE DALMATIANS &amp; <br> OTHERS CANINE RESCUE, INC.</h1><br>
 							<p class="font-weight-light d-none d-md-block" style="font-size: 16px; opacity: .7;">Dedicated to Rescue, Rehabilitation & Re-homing of Dalmatians <br> Through Fostering & Adoption
 								A Non-Profit 501(c)(3)</p>
-							<a href="#" class="button button-large button-rounded ml-0">Join Us Now</a><span class="leftmargin-sm">+</span>
+							<a href="#adoption" class="button button-large button-rounded ml-0">Adopt Now</a><span class="leftmargin-sm">+</span>
 							
 							
 
@@ -95,9 +95,11 @@
 						</div>
 					</div>
 				</div>
-				
+				<section id="adoption">
+					
 				<%- include('../includes/user-testimonials.ejs') %>
 
+				</section>
 				<div class="section mb-0 clearfix">
 					<div class="heading-block center border-bottom-0 mb-0 mx-auto" style="max-width: 640px">
 						<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Gallery</h3>
@@ -188,7 +190,7 @@
 							<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Contact Us</h3>
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
 						</div>
-						<form action="/animals/question" method="post" class="php-email-form">
+						<form action="/animals/question" method="post" class="php-email-form" ectype="multipart/form-data"> 
 							<div class="form-row">
 							  <div class="form-group col-12">
 								<label for="name">Your Name</label>
@@ -365,12 +367,6 @@
 
 	<!-- JavaScripts
 	============================================= -->
-	<script src="/js/jquery.js"></script>
-	<script src="/js/plugins.min.js"></script>
-
-	<!-- Footer Scripts
-	============================================= -->
-	<script src="/js/functions.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<%-include('../includes/user-footer.ejs') %>
 </body>
 </html>
