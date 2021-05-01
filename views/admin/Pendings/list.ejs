@@ -18,24 +18,24 @@
              <tr class="bg-light">
                 <th class="border-top-0">Name</th>
                 <th class="border-top-0">Email</th>
-                <th class="border-top-0">Subject</th>
+                <th class="border-top-0">Animal</th>
                 <th class="border-top-0">Files Attached</th>
              </tr>
           </thead>
           <tbody>
-           <% if (questions.length > 0 ) {  %>
-            <% for (let q of questions) { %>
+           <% if (requests.length > 0 ) {  %>
+            <% for (let q of requests) { %>
             <tr>
               <td>
                  <div class="d-flex align-items-center">
                     <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
                     <div class="">
-                      <h4 class="m-b-0 font-16"></h4><%= q.name %></h4>
+                      <h4 class="m-b-0 font-16"></h4><%= q.first_name %> <%= q.last_name%></h4>
                     </div>
                  </div>
               </td>
               <td><%= q.email %></td>
-              <td><%= q.subject %></td>
+              <td><%= q.animal.name %></td>
               <td>
                <p>
                   <a class="btn btn-primary" style="color: white">

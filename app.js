@@ -47,17 +47,13 @@ const fileStorage = multer.diskStorage({
     cb(null, "images");
   },
   filename: (req, file, cb) => {
-    cb(null, uuidv4() + file.originalname);
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/pdf"
-  ) {
+  const ext = path.extname(file.originalname);
+  if (ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".pdf") {
     cb(null, true);
   } else {
     cb(null, false);
@@ -65,7 +61,10 @@ const fileFilter = (req, file, cb) => {
 };
 
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).array("file", 10)
+  multer({
+    storage: fileStorage,
+    fileFilter: fileFilter,
+  }).array("file", 10)
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

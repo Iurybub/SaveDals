@@ -17,7 +17,7 @@
              <% for (let animal of animals) { %>
                 <div class="col-md-6" >
                     <div class="h-100 p-5 bg-light border rounded-3">
-                        <img src="\<%= animal.imageUrl %>" alt="" class="img-fluid  mb-3 rounded-3">
+                        <img src="<%= animal.imageUrl %>" alt="" class="img-fluid  mb-3 rounded-3">
                       <h2><%= animal.name %></h2>
                       <p><%= animal.description %></p>
                       <a class="btn btn-outline-secondary" type="button" href="/animals/<%= animal._id %>">View</a>

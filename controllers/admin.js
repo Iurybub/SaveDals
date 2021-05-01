@@ -16,10 +16,12 @@ exports.getDashboard = (req, res, next) => {
     })
     .then(() => {
       Request.find()
+        .populate("animal")
         .limit(5)
         .sort("-created_at")
         .then((request) => {
           requests = request;
+          console.log(requests);
         })
         .then(() => {
           Question.find()
@@ -95,13 +97,13 @@ exports.getEditAnimals = (req, res, next) => {
 };
 exports.postAddAnimal = (req, res, next) => {
   const name = req.body.name;
-  const image = req.file;
+  const image = req.files[0];
   const imageUrl = image.path;
   const age = req.body.age;
   const breed = req.body.breed;
   const description = req.body.description;
   const created_at = new Date();
-  console.log(req.file);
+  console.log(req.files[0].path);
   const animal = new Animal({
     name: name,
     imageUrl: imageUrl,
@@ -115,6 +117,7 @@ exports.postAddAnimal = (req, res, next) => {
     .then((result) => {
       console.log("Created Animal");
       res.redirect("/admin");
+      req.file = null;
     })
     .catch((err) => console.log(err));
 };
@@ -122,7 +125,7 @@ exports.postAddAnimal = (req, res, next) => {
 exports.postEditAnimal = (req, res, next) => {
   const id = req.body.animalID;
   const name = req.body.name;
-  const image = req.file;
+  const image = req.files[0];
   const age = req.body.age;
   const breed = req.body.breed;
   const description = req.body.description;

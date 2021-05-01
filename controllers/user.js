@@ -64,26 +64,31 @@ exports.postQuestion = (req, res, next) => {
 };
 
 exports.postRequest = (req, res, next) => {
+  console.log(req.files + "test");
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
   const email = req.body.email;
   const animal = req.body.animal;
-  const paperwork = req.files;
-  console.log(req.files);
-  console.log([first_name, last_name, email, animal]);
-
+  const paperwork = req.files[0];
+  const paperworkUrl = paperwork.path;
   const request = new Request({
     first_name: first_name,
     last_name: last_name,
     email: email,
     animal: animal,
-    // paperworkUrl: paperworkUrl,
+    paperworkUrl: paperworkUrl,
   });
 
-  request
-    .save()
+  Request.findOne({ _id: animal })
+    .populate("animal")
+    .exec()
     .then(() => {
-      res.redirect("/");
+      request
+        .save()
+        .then(() => {
+          res.redirect("/");
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 };

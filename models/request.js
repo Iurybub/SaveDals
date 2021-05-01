@@ -16,13 +16,14 @@ const requestSchema = new Schema({
     required: true,
   },
   animal: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Animal",
+    required: true,
   },
-  // paperworkUrl: {
-  //   type: String,
-  //   required: true,
-  // },
+  paperworkUrl: {
+    type: String,
+    required: true,
+  },
   created_at: {
     type: Date,
   },
