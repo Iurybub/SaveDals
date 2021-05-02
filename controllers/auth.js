@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 
 exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
@@ -7,6 +8,11 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     isAuthenticated: false,
     csrfToken: req.csrfToken(),
+    errorMessage: [],
+    oldInput: {
+      email: "",
+      password: "",
+    },
   });
 };
 
@@ -16,66 +22,92 @@ exports.getSignup = (req, res, next) => {
     pageTitle: "Signup",
     isAuthenticated: false,
     csrfToken: req.csrfToken(),
+    errorMessage: [],
+    oldInput: {
+      name: "",
+      email: "",
+      password: "",
+      password_confirm: "",
+    },
   });
 };
 
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  User.findOne({ email: email })
-    .then((user) => {
-      if (!user) {
-        return res.redirect("/login");
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render("auth/login", {
+      path: "/signup",
+      pageTitle: "Signup",
+      csrfToken: req.csrfToken(),
+      isAuthenticated: false,
+      errorMessage: errors,
+    });
+  }
+  User.findOne({ email: email }).then((user) => {
+    if (!user) {
+      return res.status(422).render("auth/login", {
+        errorMessage: "Wrong credentials",
+        csrfToken: req.csrfToken(),
+        oldInput: {
+          email: email,
+        },
+      });
+    }
+    bcrypt.compare(password, user.password).then((doMatch) => {
+      if (doMatch) {
+        req.session.isLoggedIn = true;
+        req.session.user = user;
+        return req.session.save((err) => {
+          console.log(err);
+          res.redirect("/admin");
+        });
       }
-      bcrypt
-        .compare(password, user.password)
-        .then((result) => {
-          if (result) {
-            req.session.isLoggedIn = true;
-            req.session.user = user;
-            return req.session.save((err) => {
-              console.log(err);
-              res.redirect("/admin");
-            });
-          }
-          res.redirect("/login");
-        })
-        .catch((err) => console.log(err));
-    })
-    .catch((err) => console.log(err));
+      return res.status(422).render("auth/login", {
+        path: "/login",
+        pageTitle: "Login",
+        csrfToken: req.csrfToken(),
+        errorMessage: "Invalid email or password.",
+        validationErrors: [],
+        oldInput: {
+          email: email,
+        },
+      });
+    });
+  });
 };
 
 exports.postSignup = (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-  const password_confirm = req.body.password_confirm;
-
-  User.findOne({ email: email })
-    .then((userResult) => {
-      if (userResult) {
-        return res.redirect("/signup");
-      }
-      if (password !== password_confirm) {
-        return res.redirect("/signup");
-      }
-      return bcrypt
-        .hash(password, 12)
-        .then((hashedPassword) => {
-          const user = new User({
-            name: name,
-            email: email,
-            password: hashedPassword,
-          });
-          return user.save();
-        })
-        .then((result) => {
-          res.redirect("/login");
-        });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render("auth/signup", {
+      path: "/signup",
+      pageTitle: "Signup",
+      isAuthenticated: false,
+      errorMessage: errors.array()[0].msg,
+      csrfToken: req.csrfToken(),
+      oldInput: {
+        name: name,
+        email: email,
+      },
+    });
+  }
+  bcrypt
+    .hash(password, 12)
+    .then((hashedPassword) => {
+      const user = new User({
+        name: name,
+        email: email,
+        password: hashedPassword,
+      });
+      return user.save();
     })
-
-    .catch((err) => {
-      console.log(err);
+    .then((result) => {
+      res.redirect("/login");
     });
 };
 

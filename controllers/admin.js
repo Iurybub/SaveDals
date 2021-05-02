@@ -3,6 +3,7 @@ const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
 const Testimonial = require("../models/testimonial");
+const { validationResult } = require("express-validator");
 const fileHelper = require("../utils/file");
 exports.getDashboard = (req, res, next) => {
   let animals;
@@ -57,6 +58,7 @@ exports.getAnimals = (req, res, next) => {
         pageAbout: "Our Dals",
         user: req.user,
         csrfToken: req.csrfToken(),
+        errorMessage: "",
       });
     })
     .catch((err) => console.log(err));
@@ -71,6 +73,7 @@ exports.getAddAnimals = (req, res, next) => {
         editing: false,
         csrfToken: req.csrfToken(),
         user: req.user,
+        errorMessage: "",
         animal: {},
       });
     })
@@ -103,7 +106,18 @@ exports.postAddAnimal = (req, res, next) => {
   const breed = req.body.breed;
   const description = req.body.description;
   const created_at = new Date();
-  console.log(req.files[0].path);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(417).render("admin/Animals/edit", {
+      editing: false,
+      csrfToken: req.csrfToken(),
+      user: req.user,
+      animal: {},
+      errorMessage: errors,
+    });
+  }
+
   const animal = new Animal({
     name: name,
     imageUrl: imageUrl,

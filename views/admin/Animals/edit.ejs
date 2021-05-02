@@ -35,7 +35,11 @@
                                             <h2>Listing form</h2>
                                             <p class="lead">Below is a form to list an animal up for adoption. Please follow the format and make sure to fill out all of the firlds for the best user expirience</p>
                                           </div>
-                                      
+                                          <% if (errorMessage.length > 0) { %> 
+                                            <div class="alert alert-danger" role="alert">
+                                               <%= errorMessage.msg %>
+                                              </div>
+                                            <% } %>
                                           <div class="row g-5">
                                            
                                             <div class="col-12">

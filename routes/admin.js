@@ -1,5 +1,7 @@
 const express = require("express");
 const adminController = require("../controllers/admin");
+const { check } = require("express-validator");
+const path = require("path");
 
 const router = express.Router();
 const ensureAuth = require("../middleware/ensureAuth");
@@ -27,4 +29,5 @@ router.post(
   ensureAuth,
   adminController.postDeleteAnimal
 );
+
 module.exports = router;

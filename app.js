@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -7,7 +6,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const User = require("./models/user");
 const multer = require("multer");
 const csrf = require("csurf");
-const { v4: uuidv4 } = require("uuid");
+const flash = require("connect-flash");
 
 const errorHandler = require("./controllers/error");
 
@@ -68,6 +67,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
 
 app.set("view engine", "ejs");
 app.set("views", "views");

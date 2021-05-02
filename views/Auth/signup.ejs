@@ -1,22 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/signup" method="post">
-        <input type="text" name="email" placeholder="Email"/>
-        <input type="text" name="name" placeholder="Full Name"/>
-        <input type="text" type="password" name="password" placeholder="Password"/>
-        <input type="text" type="password" name="password_confirm" placeholder="Confirm Password"/>
-        <input type="hidden" value="<%= csrfToken%>" name="_csrf">
-        <button type="submit">Signup</button>
-    </form>
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
-</body>
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/signin.css">
+   </head>
+   <body>
+    <main class="form-signin">
+        <div class="container container-login">
+          <div class="row d-flex justify-content-center">
+            <form action="/signup" method="post" >
+              <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
+              <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+              <% if (errorMessage.length > 0) { %> 
+                <div class="alert alert-danger" role="alert">
+                   <%= errorMessage %>
+                  </div>
+                <% } %>
+              <div class="form-floating">
+                  <label for="floatingInput">Full Name</label>
+                <input type="text" value="<%= oldInput.name%>" class="form-control" id="floatingInput" name="name" placeholder="John Doe">
+              </div>
+              <div class="form-floating">
+                  <label for="floatingInput">Email address</label>
+                <input type="email" value="<%= oldInput.email%>" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+              </div>
+              <div class="form-floating">
+                  <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+              </div>
+              <div class="form-floating">
+                  <label for="floatingPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="floatingPassword" name="password_confirm" placeholder="Confirm Password">
+              </div>
+          
+             
+              <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+              <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign up</button>
+              <p class="mt-5 mb-3 text-muted">&copy; 2009–2021</p>
+            </form>
+          </div>
+        </div>
+      </main>
+    <%- include('../includes/footer.ejs') %>
+   </body>
 </html>

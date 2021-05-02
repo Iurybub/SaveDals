@@ -8,9 +8,13 @@
             <form action="/login" method="post">
               <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
               <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-          
+              <% if (errorMessage.length > 0) { %> 
+                <div class="alert alert-danger" role="alert">
+                   <%= errorMessage %>
+                  </div>
+                <% } %>
               <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+                <input type="email" value="<%= oldInput.email %>" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating">
