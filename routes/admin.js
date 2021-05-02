@@ -16,6 +16,7 @@ router.get(
 );
 router.post(
   "/category/animals/actions/add",
+  check("age").isNumeric().withMessage("Age must be a number"),
   ensureAuth,
   adminController.postAddAnimal
 );

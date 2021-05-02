@@ -75,6 +75,7 @@ exports.getAddAnimals = (req, res, next) => {
         user: req.user,
         errorMessage: "",
         animal: {},
+        oldInput: {},
       });
     })
     .catch((err) => console.log(err));
@@ -108,13 +109,18 @@ exports.postAddAnimal = (req, res, next) => {
   const created_at = new Date();
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(417).render("admin/Animals/edit", {
       editing: false,
       csrfToken: req.csrfToken(),
       user: req.user,
       animal: {},
-      errorMessage: errors,
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        name: name,
+        breed: breed,
+        age: age,
+        description: description,
+      },
     });
   }
 

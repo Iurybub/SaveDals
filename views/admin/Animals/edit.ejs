@@ -37,17 +37,17 @@
                                           </div>
                                           <% if (errorMessage.length > 0) { %> 
                                             <div class="alert alert-danger" role="alert">
-                                               <%= errorMessage.msg %>
+                                               <%= errorMessage %>
                                               </div>
                                             <% } %>
                                           <div class="row g-5">
-                                           
+                                          
                                             <div class="col-12">
                                               <form class="needs-validation" action="/admin/category/animals/actions/<% if (editing) { %>edit<% } else { %>add<% } %>" method="post" enctype="multipart/form-data">
                                                 <div class="row g-3">
                                                   <div class="col-sm-6">
                                                     <label for="firstName" class="form-label">Dog's Name</label>
-                                                    <input  value="<% if (editing) { %><%= animal.name %><% } %>" type="text" name="name" class="form-control" id="firstName">
+                                                    <input  value="<% if (editing) { %><%= animal.name %><% } %><% if (oldInput.name) { %><%= oldInput.name %><% } %>" type="text" name="name" class="form-control" id="firstName">
                                                     <div class="invalid-feedback">
                                                       Valid first name is required.
                                                     </div>
@@ -55,9 +55,9 @@
                                       
                                                   <div class="col-sm-6">
                                                     <label for="lastName" class="form-label">Breed</label>
-                                                    <input value="<% if (editing) { %><%= animal.breed %><% } %>" type="text" name="breed" class="form-control" id="lastName" placeholder="" value="" required>
+                                                    <input value="<% if (editing) { %><%= animal.breed %><% } %><% if (oldInput.breed) { %><%= oldInput.breed %><% } %>" type="text" name="breed" class="form-control" id="lastName" placeholder="" value="" required>
                                                     <div class="invalid-feedback">
-                                                      Valid last name is required.
+                                                      Valid breed name is required.
                                                     </div>
                                                   </div>
                                       
@@ -74,7 +74,7 @@
                                       
                                                   <div class="col-12">
                                                     <label for="age" class="form-label">Age <span class="text-muted">(Optional)</span></label>
-                                                    <input value="<% if (editing) { %><%= animal.age %><% } %>"  type="age" name="age" class="form-control" id="age" >
+                                                    <input value="<% if (editing) { %><%= animal.age %><% } %><% if (oldInput.age) { %><%= oldInput.age %><% } %>"  type="age" name="age" class="form-control" id="age" >
                                                     <div class="invalid-feedback">
                                                       Please enter a valid email address for shipping updates.
                                                     </div>
@@ -82,16 +82,12 @@
                                       
                                                   <div class="col-12">
                                                     <label for="address" class="form-label">Description</label>
-                                                    <textarea type="text" name="description" class="form-control" id="textarea" rows="5"  required>
-                                                        <% if (editing) { %><%= animal.description %><% } %>
+                                                    <textarea type="text" name="description" class="form-control" id="textarea" rows="5"  required><% if (editing) { %><%= animal.description %><% } %><% if (oldInput.description) { %><%= oldInput.description %><% } %>
                                                     </textarea>
                                                     <div class="invalid-feedback">
                                                       Please enter a description
                                                     </div>
                                                   </div>
-                                      
-                                      
-                                                 
                                                 </div>
                                                 <hr class="my-4">
                                                 <input type="hidden" name="animalID" value="<%= animal._id %>"  />

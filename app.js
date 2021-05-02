@@ -67,7 +67,6 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
 
 app.set("view engine", "ejs");
 app.set("views", "views");
