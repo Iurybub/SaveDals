@@ -35,19 +35,16 @@
                                             <h2>Listing form</h2>
                                             <p class="lead">Below is a form to list an animal up for adoption. Please follow the format and make sure to fill out all of the firlds for the best user expirience</p>
                                           </div>
-                                          <% if (errorMessage.length > 0) { %> 
-                                            <div class="alert alert-danger" role="alert">
-                                               <%= errorMessage %>
-                                              </div>
-                                            <% } %>
+                                            <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+                                            </div>
                                           <div class="row g-5">
-                                          
+                                            
                                             <div class="col-12">
-                                              <form class="needs-validation" action="/admin/category/animals/actions/<% if (editing) { %>edit<% } else { %>add<% } %>" method="post" enctype="multipart/form-data">
+                                              <form class="needs-validation" onsubmit="event.preventDefault(); validateInput();" action="/admin/category/animals/actions/<% if (editing) { %>edit<% } else { %>add<% } %>" method="post" id="animalForm" enctype="multipart/form-data">
                                                 <div class="row g-3">
                                                   <div class="col-sm-6">
                                                     <label for="firstName" class="form-label">Dog's Name</label>
-                                                    <input  value="<% if (editing) { %><%= animal.name %><% } %><% if (oldInput.name) { %><%= oldInput.name %><% } %>" type="text" name="name" class="form-control" id="firstName">
+                                                    <input  value="<% if (editing) { %><%= animal.name %><% } %><% if (oldInput.name) { %><%= oldInput.name %><% } %>" type="text" name="name" class="form-control" id="name">
                                                     <div class="invalid-feedback">
                                                       Valid first name is required.
                                                     </div>
@@ -55,7 +52,7 @@
                                       
                                                   <div class="col-sm-6">
                                                     <label for="lastName" class="form-label">Breed</label>
-                                                    <input value="<% if (editing) { %><%= animal.breed %><% } %><% if (oldInput.breed) { %><%= oldInput.breed %><% } %>" type="text" name="breed" class="form-control" id="lastName" placeholder="" value="" required>
+                                                    <input value="<% if (editing) { %><%= animal.breed %><% } %><% if (oldInput.breed) { %><%= oldInput.breed %><% } %>" type="text" name="breed" class="form-control" id="breed" placeholder="" value="" required>
                                                     <div class="invalid-feedback">
                                                       Valid breed name is required.
                                                     </div>
@@ -73,8 +70,8 @@
                                                   </div>
                                       
                                                   <div class="col-12">
-                                                    <label for="age" class="form-label">Age <span class="text-muted">(Optional)</span></label>
-                                                    <input value="<% if (editing) { %><%= animal.age %><% } %><% if (oldInput.age) { %><%= oldInput.age %><% } %>"  type="age" name="age" class="form-control" id="age" >
+                                                    <label for="age" class="form-label">Age</label>
+                                                    <input value="<% if (editing) { %><%= animal.age %><% } %><% if (oldInput.age) { %><%= oldInput.age %><% } %>"  type="number" name="age" step="0.01" class="form-control" id="age" >
                                                     <div class="invalid-feedback">
                                                       Please enter a valid email address for shipping updates.
                                                     </div>
@@ -82,7 +79,7 @@
                                       
                                                   <div class="col-12">
                                                     <label for="address" class="form-label">Description</label>
-                                                    <textarea type="text" name="description" class="form-control" id="textarea" rows="5"  required><% if (editing) { %><%= animal.description %><% } %><% if (oldInput.description) { %><%= oldInput.description %><% } %>
+                                                    <textarea type="text" name="description" id="description" class="form-control" id="textarea" rows="5"  required><% if (editing) { %><%= animal.description %><% } %><% if (oldInput.description) { %><%= oldInput.description %><% } %>
                                                     </textarea>
                                                     <div class="invalid-feedback">
                                                       Please enter a description
@@ -104,16 +101,6 @@
 					</div>
 				</div>
 	<%- include('../../includes/footer.ejs') %>
-    <script>
-        const imageButton = document.getElementById('imageButton')
-        const fileUpload = document.getElementById('fileUpload')
-        imageButton.addEventListener('click', () => {
-            fileUpload.click();
-            console.log("It works again bc why not?")
-        })
-        fileUpload.addEventListener('change', () => {
-            imageButton.innerHTML = fileUpload.value.split("\\").pop()
-        })
-    </script>
+    <script src="/admin-validation.js"></script>
 </body>
 </html>

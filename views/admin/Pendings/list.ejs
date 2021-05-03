@@ -24,21 +24,21 @@
           </thead>
           <tbody>
            <% if (requests.length > 0 ) {  %>
-            <% for (let q of requests) { %>
+            <% for (let request of requests) { %>
             <tr>
               <td>
                  <div class="d-flex align-items-center">
                     <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
                     <div class="">
-                      <h4 class="m-b-0 font-16"></h4><%= q.first_name %> <%= q.last_name%></h4>
+                      <h4 class="m-b-0 font-16"></h4><%= request.first_name %> <%= request.last_name%></h4>
                     </div>
                  </div>
               </td>
-              <td><%= q.email %></td>
-              <td><%= q.animal.name %></td>
+              <td><%= request.email %></td>
+              <td><%= request.animal.name %></td>
               <td>
                <p>
-                  <a class="btn btn-primary" style="color: white">
+                  <a class="btn btn-primary" href="/admin/category/animals/get-questionaire/<%= request.id %>" style="color: white">
                     View
                   </a>
                 </p>

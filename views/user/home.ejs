@@ -190,7 +190,14 @@
 							<h3 class="nott font-secondary font-weight-normal" style="font-size: 36px;">Contact Us</h3>
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eum inventore consectetur dolorum, voluptatum possimus temporibus vel.</span>
 						</div>
-						<form action="/animals/question" method="post" class="php-email-form" ectype="multipart/form-data"> 
+						<div class="row">
+							<% if(errorMessage.length > 0) { %>
+								<div class="alert alert-danger" role="alert">
+									<%= errorMessage %>
+								  </div>
+							<% } %>	
+						</div>
+						<form action="/animals/question" method="post" onsubmit="event.preventDefault(); checkInputs();" class="php-email-form" id="user_question_form">  
 							<div class="form-row">
 							  <div class="form-group col-12">
 								<label for="name">Your Name</label>
@@ -198,7 +205,7 @@
 								<div class="validate"></div>
 							  </div>
 							  <div class="form-group col-12">
-								<label for="name">Your Email</label>
+								<label for="name">Your Email </label>
 								<input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
 								<div class="validate"></div>
 							  </div>
@@ -210,7 +217,7 @@
 							</div>
 							<div class="form-group">
 							  <label for="name">Message</label>
-							  <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
+							  <textarea class="form-control" id="message" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
 							  <div class="validate"></div>
 							</div>
 							<div class="mb-3">
@@ -368,5 +375,6 @@
 	<!-- JavaScripts
 	============================================= -->
 <%-include('../includes/user-footer.ejs') %>
+<script src="user-question.js"></script>
 </body>
 </html>

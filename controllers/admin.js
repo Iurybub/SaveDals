@@ -5,6 +5,8 @@ const Question = require("../models/Question");
 const Testimonial = require("../models/testimonial");
 const { validationResult } = require("express-validator");
 const fileHelper = require("../utils/file");
+const errorHandler = require("../utils/errorHandler");
+
 exports.getDashboard = (req, res, next) => {
   let animals;
   let questions;
@@ -22,7 +24,6 @@ exports.getDashboard = (req, res, next) => {
         .sort("-created_at")
         .then((request) => {
           requests = request;
-          console.log(requests);
         })
         .then(() => {
           Question.find()
@@ -43,6 +44,9 @@ exports.getDashboard = (req, res, next) => {
                 user: req.user,
                 csrfToken: req.csrfToken(),
               });
+            })
+            .catch((err) => {
+              errorHandler(err);
             });
         });
     });
@@ -61,7 +65,7 @@ exports.getAnimals = (req, res, next) => {
         errorMessage: "",
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => cerrorHandler(err));
 };
 
 exports.getAddAnimals = (req, res, next) => {
@@ -78,7 +82,9 @@ exports.getAddAnimals = (req, res, next) => {
         oldInput: {},
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      errorHandler(err);
+    });
 };
 
 exports.getEditAnimals = (req, res, next) => {
@@ -95,19 +101,23 @@ exports.getEditAnimals = (req, res, next) => {
         user: req.user,
         animal: animal,
         editing: editMode,
+        oldInput: {},
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => errorHandler(err));
 };
 exports.postAddAnimal = (req, res, next) => {
   const name = req.body.name;
   const image = req.files[0];
-  const imageUrl = image.path;
   const age = req.body.age;
   const breed = req.body.breed;
   const description = req.body.description;
   const created_at = new Date();
   const errors = validationResult(req);
+  if (!image) {
+    return res.redirect("/500");
+  }
+  const imageUrl = image.path;
   if (!errors.isEmpty()) {
     return res.status(417).render("admin/Animals/edit", {
       editing: false,
@@ -135,11 +145,12 @@ exports.postAddAnimal = (req, res, next) => {
   animal
     .save()
     .then((result) => {
-      console.log("Created Animal");
       res.redirect("/admin");
       req.file = null;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      errorHandler(err, "Failed to create an instance of an animal");
+    });
 };
 
 exports.postEditAnimal = (req, res, next) => {
@@ -150,7 +161,6 @@ exports.postEditAnimal = (req, res, next) => {
   const breed = req.body.breed;
   const description = req.body.description;
   const created_at = new Date();
-  console.log(id);
   Animal.findById(id)
     .then((animal) => {
       if (image) {
@@ -167,17 +177,37 @@ exports.postEditAnimal = (req, res, next) => {
         res.redirect("/admin");
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) =>
+      errorHandler(err, "Failed to upadte an instance of a model")
+    );
 };
 
 exports.postDeleteAnimal = (req, res, next) => {
   const id = req.params.id;
   Animal.findById(id)
     .then((animal) => {
-      fileHelper.deleteFile(animal.imageUrl);
-      return Animal.deleteOne({ _id: id }).then(() => {
-        res.redirect("/admin");
-      });
+      try {
+        fileHelper.deleteFile(animal.imageUrl);
+      } finally {
+        return Animal.deleteOne({ _id: id }).then(() => {
+          res.redirect("/admin");
+        });
+      }
     })
-    .catch((err) => console.log(err));
+    .catch((err) =>
+      errorHandler(err, "Failed to delete an instance of a model")
+    );
+};
+
+exports.getApplication = (req, res, next) => {
+  const appId = req.params.id;
+  const request = Request.findOne({ _id: appId })
+    .then((request) => {
+      res.download(
+        request.paperworkUrl.toString(),
+        `${request.name}-application.pdf`
+      );
+    })
+    .catch((err) => errorHandler(err));
+  const reqString = request.toString();
 };

@@ -10,13 +10,17 @@ router.get("/", ensureAuth, adminController.getDashboard); //Done
 router.get("/category/animals", ensureAuth, adminController.getAnimals);
 router.get("/category/animals/add", ensureAuth, adminController.getAddAnimals);
 router.get(
+  "/category/animals/get-questionaire/:id",
+  ensureAuth,
+  adminController.getApplication
+);
+router.get(
   "/category/animals/edit/:id",
   ensureAuth,
   adminController.getEditAnimals
 );
 router.post(
   "/category/animals/actions/add",
-  check("age").isNumeric().withMessage("Age must be a number"),
   ensureAuth,
   adminController.postAddAnimal
 );

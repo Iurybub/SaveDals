@@ -2,13 +2,18 @@ const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
+const path = require("path");
+const fs = require("fs");
 const letter_id = require("letter-id");
+const { validationResult } = require("express-validator");
 
 exports.getHome = (req, res, next) => {
   res.render("user/home", {
     pageTitle: "Home Dals",
     isAuth: req.session.isLoggedIn,
     csrfToken: req.csrfToken(),
+    errorMessage: [],
+    oldInput: {},
   });
 };
 
@@ -45,7 +50,21 @@ exports.postQuestion = (req, res, next) => {
   const email = req.body.email;
   const subject = req.body.subject;
   const message = req.body.message;
-
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("user/home", {
+      pageTitle: "Home Dals",
+      isAuth: req.session.isLoggedIn,
+      csrfToken: req.csrfToken(),
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+      },
+    });
+  }
   const question = new Question({
     name: name,
     email: email,
@@ -91,4 +110,8 @@ exports.postRequest = (req, res, next) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
+};
+
+exports.getQuestionaire = (req, res, next) => {
+  res.download("uploads/adoption-questionaire.pdf");
 };
