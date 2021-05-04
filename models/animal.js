@@ -31,6 +31,14 @@ const animalSchema = new Schema({
   created_at: {
     type: Date,
   },
+  requested_by: [
+    {
+      type: Schema.Types.ObjectId,
+      required: false,
+      default: "",
+      ref: "Request",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Animal", animalSchema);

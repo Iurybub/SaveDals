@@ -1,5 +1,5 @@
-module.exports = (err, msg) => {
+module.exports = (err, msg, next) => {
   const error = new Error(msg + err.message);
   error.httpStatusCode = 500;
-  next(error);
+  return next(error);
 };

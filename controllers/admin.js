@@ -4,7 +4,7 @@ const Request = require("../models/Request");
 const Question = require("../models/Question");
 const Testimonial = require("../models/testimonial");
 const { validationResult } = require("express-validator");
-const fileHelper = require("../utils/file");
+const { deleteFile } = require("../utils/file");
 const errorHandler = require("../utils/errorHandler");
 
 exports.getDashboard = (req, res, next) => {
@@ -46,7 +46,9 @@ exports.getDashboard = (req, res, next) => {
               });
             })
             .catch((err) => {
-              errorHandler(err);
+              const error = new Error(err);
+              error.httpStatusCode = 500;
+              return next(error);
             });
         });
     });
@@ -65,7 +67,11 @@ exports.getAnimals = (req, res, next) => {
         errorMessage: "",
       });
     })
-    .catch((err) => cerrorHandler(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getAddAnimals = (req, res, next) => {
@@ -83,7 +89,9 @@ exports.getAddAnimals = (req, res, next) => {
       });
     })
     .catch((err) => {
-      errorHandler(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -104,7 +112,11 @@ exports.getEditAnimals = (req, res, next) => {
         oldInput: {},
       });
     })
-    .catch((err) => errorHandler(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 exports.postAddAnimal = (req, res, next) => {
   const name = req.body.name;
@@ -149,7 +161,9 @@ exports.postAddAnimal = (req, res, next) => {
       req.file = null;
     })
     .catch((err) => {
-      errorHandler(err, "Failed to create an instance of an animal");
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -177,26 +191,36 @@ exports.postEditAnimal = (req, res, next) => {
         res.redirect("/admin");
       });
     })
-    .catch((err) =>
-      errorHandler(err, "Failed to upadte an instance of a model")
-    );
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postDeleteAnimal = (req, res, next) => {
   const id = req.params.id;
-  Animal.findById(id)
+  const animal = Animal.findOneAndDelete({ _id: id });
+  let imageUrl;
+  animal
     .then((animal) => {
-      try {
-        fileHelper.deleteFile(animal.imageUrl);
-      } finally {
-        return Animal.deleteOne({ _id: id }).then(() => {
-          res.redirect("/admin");
+      imageUrl = animal.imageUrl;
+      Request.deleteMany({ animal: animal })
+        .then(() => {
+          deleteFile(imageUrl);
+          return res.redirect("/admin");
+        })
+        .catch((err) => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
         });
-      }
     })
-    .catch((err) =>
-      errorHandler(err, "Failed to delete an instance of a model")
-    );
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getApplication = (req, res, next) => {
@@ -208,6 +232,10 @@ exports.getApplication = (req, res, next) => {
         `${request.name}-application.pdf`
       );
     })
-    .catch((err) => errorHandler(err));
-  const reqString = request.toString();
+
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };

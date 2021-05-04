@@ -3,6 +3,7 @@ const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
 const path = require("path");
+const errorHandler = require("../utils/errorHandler");
 const fs = require("fs");
 const letter_id = require("letter-id");
 const { validationResult } = require("express-validator");
@@ -27,7 +28,11 @@ exports.getAnimals = (req, res, next) => {
         isAuth: req.session.isLoggedIn,
       });
     })
-    .catch((err) => console.log);
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 exports.getAnimalDetails = (req, res, next) => {
   const animalId = req.params.id;
@@ -40,7 +45,11 @@ exports.getAnimalDetails = (req, res, next) => {
         isAuth: req.session.isLoggedIn,
       });
     })
-    .catch((err) => res.redirect("/"));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postQuestion = (req, res, next) => {
@@ -78,7 +87,9 @@ exports.postQuestion = (req, res, next) => {
       res.redirect("/");
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -90,6 +101,7 @@ exports.postRequest = (req, res, next) => {
   const animal = req.body.animal;
   const paperwork = req.files[0];
   const paperworkUrl = paperwork.path;
+  let requestObj;
   const request = new Request({
     first_name: first_name,
     last_name: last_name,
@@ -97,19 +109,21 @@ exports.postRequest = (req, res, next) => {
     animal: animal,
     paperworkUrl: paperworkUrl,
   });
-
-  Request.findOne({ _id: animal })
-    .populate("animal")
-    .exec()
+  const result = request.save();
+  result
     .then(() => {
-      request
-        .save()
-        .then(() => {
-          res.redirect("/");
-        })
-        .catch((err) => console.log(err));
+      Animal.updateOne(
+        { _id: animal },
+        { $push: { requested_by: request } }
+      ).then(() => {
+        res.redirect("/animals");
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getQuestionaire = (req, res, next) => {
