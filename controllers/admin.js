@@ -239,3 +239,17 @@ exports.getApplication = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.getTestimonials = (req, res, next) => {
+  Testimonial.find().then((testimonials) => {
+    res.render("admin/Testimonials", {
+      testimonials: testimonials,
+      path: "/category/testimonials",
+      pageTitle: "Admin | Dasboard",
+      pageAbout: "Dashboard",
+      user: req.user,
+      csrfToken: req.csrfToken(),
+    });
+  });
+};
+exports.getAddTestimonials = (req, res, next) => {};

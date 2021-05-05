@@ -4,18 +4,20 @@
    <body>
     <main class="form-signin">
         <div class="container container-login">
+         <div class="row"> 
+           <% if (errorMessage.length > 0) { %> 
+          <div class="alert alert-danger" role="alert">
+             <%= errorMessage %>
+            </div>
+          <% } %></div>
           <div class="row d-flex justify-content-center">
             <form action="/signup" method="post" >
               <img class="mb-4 img-fluid" src="/assets/logo.png" alt="" height="70">
               <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-              <% if (errorMessage.length > 0) { %> 
-                <div class="alert alert-danger" role="alert">
-                   <%= errorMessage %>
-                  </div>
-                <% } %>
+             
               <div class="form-floating">
                   <label for="floatingInput">Full Name</label>
-                <input type="text" value="<%= oldInput.name%>" class="form-control" id="floatingInput" name="name" placeholder="John Doe">
+                <input type="text" value="<%= oldInput.name%>" class="form-control" id="floatingInput" name="name" />
               </div>
               <div class="form-floating">
                   <label for="floatingInput">Email address</label>

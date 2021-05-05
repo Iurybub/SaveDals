@@ -8,6 +8,16 @@ const ensureAuth = require("../middleware/ensureAuth");
 
 router.get("/", ensureAuth, adminController.getDashboard); //Done
 router.get("/category/animals", ensureAuth, adminController.getAnimals);
+router.get(
+  "/category/testimonials",
+  ensureAuth,
+  adminController.getTestimonials
+);
+router.get(
+  "/category/testimonials/add",
+  ensureAuth,
+  adminController.getAddTestimonials
+);
 router.get("/category/animals/add", ensureAuth, adminController.getAddAnimals);
 router.get(
   "/category/animals/get-questionaire/:id",
