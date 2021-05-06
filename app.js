@@ -3,11 +3,10 @@ const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const User = require("./models/user");
 const multer = require("multer");
 const csrf = require("csurf");
-const flash = require("connect-flash");
-
+//To Add
+const User = require("./models/user");
 const errorHandler = require("./controllers/error");
 
 const MONGODB_URI =
@@ -91,11 +90,11 @@ app.use(userRoutes);
 app.get("/500", errorHandler.get500);
 app.use(errorHandler.get404);
 
-// app.use((error, req, res, next) => {
-//   res.redirect("/500");
-// });
+app.use((error, req, res, next) => {
+  res.redirect("/500");
+});
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3030;
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })

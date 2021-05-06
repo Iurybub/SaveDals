@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
-const path = require("path");
-const errorHandler = require("../utils/errorHandler");
-const fs = require("fs");
 const letter_id = require("letter-id");
 const { validationResult } = require("express-validator");
 
