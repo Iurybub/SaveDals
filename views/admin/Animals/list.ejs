@@ -7,79 +7,67 @@
              <h5 class="card-subtitle">Pets upp for adoption &amp; foster</h5>
           </div>
           <div class="ml-auto">
-            <a href="/admin/category/animals/add" class="btn btn-sm btn-success">Add</a>
+            <a href="/admin/category/animals/add" class="btn btn-sm btn-outline-success">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                Add
+            </a>
           </div>
        </div>
        <!-- title -->
     </div>
     <div class="table-responsive">
-       <table class="table  table-borderless v-middle">
-          <thead>
-             <tr class="bg-light">
-                <th class="border-top-0">Dog</th>
-                <th class="border-top-0">Breed</th>
-                <th class="border-top-0">Status</th>
-                <th class="border-top-0"></th>
-                <th class="border-top-0"></th>
-             </tr>
-          </thead>
-          <tbody>
-           <% if (animals.length > 0 ) {  %>
-            <% for (let animal of animals) { %>
-            <tr>
-              <td>
-                 <div class="d-flex align-items-">
-                   
-                    <div class="">
-                      <h4 class="m-b-0 font-16"></h4><%= animal.name %></h4>
-                    </div>
-                 </div>
-              </td>
-              <td><%= animal.breed %></td>
-              <td><%= animal.adopted %></td>
-              <td>
-                <label class="label label-danger">  
-                   <a class="btn btn-primary btn-sm" href="/admin/category/animals/edit/<%=animal.id%>/?edit=true" style="color: white">
-                   Edit
-                 </a></label>
-              </td>
-              <td>
-                <label class="label label-danger">  
-                   <form action="/admin/category/animals/actions/delete/<%= animal.id %>" method="post">
-                      <input type="hidden" value="<%= csrfToken%>" name="_csrf">
-                      <button  type="submit" class="btn btn-sm  btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                      </svg></button>
-                   </form>
-                </label>
-              </td>
-           </tr>
+
+
+      <table class="table  vertical-align-middle table-hover table-borderless">
+         <thead>
+            <tr class="table-light">
+               <th scope="col"></th>
+               <th scope="col">Name</th>
+               <th scope="col">Breed</th>
+               <th scope="col">Status</th>
+               <th scope="col">Actions</th>
+               <th scope="col"></th>
+            </tr>
+         </thead>
+         <tbody>
+            <% if (animals.length > 0 ) {  %>
+               <% for (let animal of animals) { %>
+                  <tr>
+                     <th  class="border-0" scope="row"></th>
+                     <td class="border-0"><%= animal.name %> </td>
+                     <td class="border-0"><%= animal.breed %></td>
+                     <td class="border-0"><%= animal.adopted %></td>
+                     <td class="border-0"> 
+                        <div class=" position-absolute dropdown">
+                           <svg xmlns="http://www.w3.org/2000/svg"  type="button" id="ssdsddds" data-bs-toggle="dropdown" aria-expanded="false" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                           <ul class=" dropdown-menu" aria-labelledby="ssdsddds">
+                             <li><a class="dropdown-item" href="/admin/category/animals/edit/<%=animal.id%>/?edit=true">Edit</a></li>
+                             <li><a class="dropdown-item" href="/admin/category/animals/edit/<%=animal.id%>/?edit=true">View</a></li>
+                             
+                              <form action="/admin/category/animals/actions/delete/<%= animal.id %>" method="post">
+                                 <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+                                 <button  type="submit" class="btn btn-sm btn-outline-danger border-0 ml-2">Delete</button>
+                              </form>
+                           </ul>
+                         </div>
+                     </td>
+                     <td class="border-0"><i class="bi bi-three-dots-vertical"></i></td>
+                  </tr>
+               <% } %>
+              <% } else { %>
+               
+      
+               <% } %>
+
+
            
-            <% } %>
-           <% } else { %>
-            
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                 <div class="d-flex align-items-center">
-                    <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
-                    <div class="">
-                      <h4 class="m-b-0 font-16"><p class="disabled">Who let the dogs out?</p></h4>
-                    </div>
-                 </div>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-           </tr>
-            <% } %>
-          </tbody>
+            </tbody>
        </table>
     </div>
+    
  </div>
+

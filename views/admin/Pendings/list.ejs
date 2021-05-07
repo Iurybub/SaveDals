@@ -13,60 +13,48 @@
        <!-- title -->
     </div>
     <div class="table-responsive">
-       <table class="table  table-borderless v-middle">
-          <thead>
-             <tr class="bg-light">
-                <th class="border-top-0">Name</th>
-                <th class="border-top-0">Email</th>
-                <th class="border-top-0">Animal</th>
-                <th class="border-top-0">Files Attached</th>
-             </tr>
-          </thead>
-          <tbody>
-           <% if (requests.length > 0 ) {  %>
-            <% for (let request of requests) { %>
-            <tr>
-              <td>
-                 <div class="d-flex align-items-center">
-                    <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
-                    <div class="">
-                      <h4 class="m-b-0 font-16"></h4><%= request.first_name %> <%= request.last_name%></h4>
-                    </div>
-                 </div>
-              </td>
-              <td><%= request.email %></td>
-              <td><%= request.animal.name %></td>
-              <td>
-               <p>
-                  <a class="btn btn-primary" href="/admin/category/animals/get-questionaire/<%= request.id %>" style="color: white">
-                    View
-                  </a>
-                </p>
-              </td>
-           </tr>
- 
-            <% } %>
-           <% } else { %>
-            
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                 <div class="d-flex align-items-center">
-                    <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
-                    <div class="">
-                      <h4 class="m-b-0 font-16">N/A</h4>
-                    </div>
-                 </div>
-              </td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td>
-                 <label class="label label-danger">N/A</label>
-              </td>
-           </tr>
-            <% } %>
-          </tbody>
+
+
+      <table class="table  vertical-align-middle table-hover table-borderless">
+         <thead>
+            <tr class="table-light">
+               <th scope="col"></th>
+               <th scope="col">Name</th>
+               <th scope="col">Email</th>
+               <th scope="col">Animal</th>
+               <th scope="col">Files</th>
+               <th scope="col"></th>
+            </tr>
+         </thead>
+         <tbody>
+            <% if (requests.length > 0 ) {  %>
+               <% for (let request of requests) { %>
+                  <tr>
+                     <th  class="border-0" scope="row"></th>
+                     <td class="border-0"><%= request.first_name %> <%= request.last_name %></td>
+                     <td class="border-0"><%= request.email %></td>
+                     <td class="border-0"><%= request.animal.name %></td>
+                     <td class="border-0"> 
+                        <div class=" position-absolute dropdown">
+                           <svg xmlns="http://www.w3.org/2000/svg"  type="button" id="ssdsddds" data-bs-toggle="dropdown" aria-expanded="false" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                           <ul class=" dropdown-menu" aria-labelledby="ssdsddds">
+                             <li><a class="dropdown-item" href="/admin/category/animals/get-questionaire/<%= request.id %>">Download</a></li>
+                           </ul>
+                         </div>
+                     </td>
+                     <td class="border-0"><i class="bi bi-three-dots-vertical"></i></td>
+                  </tr>
+               <% } %>
+              <% } else { %>
+               
+      
+               <% } %>
+
+
+           
+            </tbody>
        </table>
     </div>
  </div>

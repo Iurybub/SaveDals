@@ -90,11 +90,11 @@ app.use(userRoutes);
 app.get("/500", errorHandler.get500);
 app.use(errorHandler.get404);
 
-app.use((error, req, res, next) => {
-  res.redirect("/500");
-});
+// app.use((error, req, res, next) => {
+//   res.redirect("/500");
+// });
 
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3000;
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })

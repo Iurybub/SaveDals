@@ -1,75 +1,57 @@
 <div class="card">
-    <div class="card-body">
-       <!-- title -->
-       <div class="d-md-flex align-items-center">
-          <div>
-             <h4 class="card-title">Questions</h4>
-             <h5 class="card-subtitle">Questions from adopters</h5>
-          </div>
-          <div class="ml-auto">
-          </div>
-       </div>
-       <!-- title -->
-    </div>
-    <div class="table-responsive">
-       <table class="table  table-borderless v-middle">
-          <thead>
-             <tr class="bg-light">
-                <th class="border-top-0">Name</th>
-                <th class="border-top-0">Email</th>
-                <th class="border-top-0">Subject</th>
-                <th class="border-top-0">Message</th>
-             </tr>
-          </thead>
-          <tbody>
-             <% if (questions.length > 0 ) {  %>
-             <% for (let q of questions) { %>
-             <tr>
-                <td>
-                   <div class="d-flex align-items-center">
-                      <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
-                      <div class="">
-                         <h4 class="m-b-0 font-16"></h4>
-                         <%= q.name %></h4>
-                      </div>
-                   </div>
-                </td>
-                <td><%= q.email %></td>
-                <td><%= q.subject %></td>
-                <td>
-                   <p>
-                      <a class="btn btn-info btn-sm" data-bs-toggle="collapse" href="#<%= q.special_id %>" role="button" aria-expanded="false" aria-controls="<%= q.special_id %>">
-                      View
-                      </a>
-                   </p>
-                </td>
-                <div class="collapse" id="<%= q.special_id %>">
-                   <div class="card card-body">
-                      <%= q.message%>                  
-                   </div>
-                </div>
-             </tr>
-             <% } %>
-             <% } else { %>
-             </thead>
-          <tbody>
-             <tr>
-                <td>
-                   <div class="d-flex align-items-center">
-                      <!-- <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div> -->
-                      <div class="">
-                         <h4 class="m-b-0 font-16">N/A</h4>
-                      </div>
-                   </div>
-                </td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>
-                   <label class="label label-danger">N/A</label>
-                </td>
-             </tr>
-             <% } %>
-          </tbody>
-       </table>
-    </div>
- </div>
+   <div class="card-body">
+      <!-- title -->
+      <div class="d-md-flex align-items-center">
+         <div>
+            <h4 class="card-title">Questions</h4>
+            <h5 class="card-subtitle">Questions from adopters</h5>
+         </div>
+         <div class="ml-auto">
+         </div>
+      </div>
+      <!-- title -->
+   </div>
+   <div class="table-responsive">
+      <table class="table  vertical-align-middle table-hover table-borderless">
+         <thead>
+            <tr class="table-light">
+               <th scope="col"></th>
+               <th scope="col">Name</th>
+               <th scope="col">Email</th>
+               <th scope="col">Subject</th>
+               <th scope="col">Message</th>
+               <th scope="col"></th>
+            </tr>
+         </thead>
+         <tbody>
+            <% if (questions.length > 0 ) {  %>
+            <% for (let question of questions) { %>
+               <div class="collapse" id="<%= question.special_id %>">
+                  <div class="card card-body">
+                     <b><%= question.name %>:</b>
+                     <br>
+                     <%= question.message%>                  
+                  </div>
+               </div>
+            <tr>
+               <th  class="border-0" scope="row"></th>
+               <td class="border-0"><%= question.name %> </td>
+               <td class="border-0"><%= question.email %></td>
+               <td class="border-0"><%= question.subject %></td>
+               <td class="border-0">
+                  <p>
+                     <a class="btn btn-info btn-sm" data-bs-toggle="collapse" href="#<%= question.special_id %>" role="button" aria-expanded="false" aria-controls="<%= question.special_id %>">
+                     View
+                     </a>
+                  </p>
+                  
+               </td>
+               <td class="border-0"><i class="bi bi-three-dots-vertical"></i></td>
+            </tr>
+            <% } %>
+            <% } else { %>
+            <% } %>
+         </tbody>
+      </table>
+   </div>
+</div>
