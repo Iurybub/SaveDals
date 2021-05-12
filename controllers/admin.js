@@ -1,11 +1,9 @@
-const mongoose = require("mongoose");
 const Animal = require("../models/Animal");
 const Request = require("../models/Request");
 const Question = require("../models/Question");
 const Testimonial = require("../models/testimonial");
 const { validationResult } = require("express-validator");
 const { deleteFile } = require("../utils/file");
-const errorHandler = require("../utils/errorHandler");
 
 exports.getDashboard = (req, res, next) => {
   let animals;

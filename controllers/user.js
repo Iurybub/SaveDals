@@ -91,7 +91,6 @@ exports.postQuestion = (req, res, next) => {
 };
 
 exports.postRequest = (req, res, next) => {
-  console.log(req.files + "test");
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
   const email = req.body.email;

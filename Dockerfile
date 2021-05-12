@@ -1,17 +1,7 @@
-FROM node:14-alpine as base
-
-WORKDIR /src
-COPY package*.json /
-EXPOSE 3000
-
-FROM base as production
+FROM node:14-alpine
 ENV NODE_ENV=production
-RUN npm ci
-COPY . /
-CMD ["node", "bin/www"]
-
-FROM base as dev
-ENV NODE_ENV=development
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install -g nodemon && npm install
 COPY . /
 CMD ["npm", "start"]
